@@ -1,0 +1,6 @@
+namespace VolonterUA.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}
