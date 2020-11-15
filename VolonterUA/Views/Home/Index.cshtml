@@ -1,24 +1,113 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+﻿@model VolonterUA.Models.Localizations.IndexPage.AIndexPageLocalization
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #Header {
+            background-color: yellow;
+            width: 100%;
+            height: 40px;
+        }
+
+        #Main {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            background-image: url("@Url.Content("~/Content/Images/TwoHelpHands.jpg")");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+            #Main > div {
+                width: 45%;
+                max-height: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+
+        #TitleAndSloganWrapper {
+            height: 70%;
+        }
+
+        #Main > div h1, h3 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: xx-large;
+            text-align: center;
+            color: ghostwhite;
+        }
+
+        #SignUpAsButtons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+            #SignUpAsButtons a {
+                text-decoration: none;
+                color: black;
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-size: x-large;
+                display: block;
+                height: 100%;
+                width: 100%;
+                line-height: 50px;
+            }
+
+            #SignUpAsButtons > .SignUpAsButtonWrapper {
+                height: 50px;
+                width: 40%;
+                text-align: center;
+                background-color: goldenrod;
+            }
+
+                #SignUpAsButtons > .SignUpAsButtonWrapper:hover {
+                    background-color: gold;
+                }
+    </style>
+</head>
+<body>
+    <div id="Header">
+        
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    <div id="Main">
+        <div>
+            <div id="TitleAndSloganWrapper">
+                <div id="TitleWrapper">
+                    <h1 id="Title">@Model.Title</h1>
+                </div>
+                <div id="SloganWrapper">
+                    <h3 id="Slogan">@Model.Slogan</h3>
+                </div>
+            </div>
+            <div id="SignUpAsButtons">
+                <div class="SignUpAsButtonWrapper">
+                    <a href="/register?type=Volonter" class="SignUpAsButton" id="SignUpAsVoloterButton">@Model.WantToHelp</a>
+                </div>
+                <div class="SignUpAsButtonWrapper">
+                    <a href="/register?type=VolonterOrganization" class="SignUpAsButton" id="SignUpAsVoloterOrganizationButton">@Model.SearchForVolonters</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+</body>
+</html>
