@@ -8,6 +8,7 @@ namespace VolonterUA.Models.Localizations.IndexPage
 {
     public abstract class AIndexPageLocalization
     {
+        public abstract string DocumentTitle { get; }
         public abstract string Title { get; }
         public abstract string Slogan { get; }
         public abstract string WantToHelp { get; }

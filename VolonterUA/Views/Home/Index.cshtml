@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>@Model.DocumentTitle</title>
     <style>
         html, body {
             width: 100%;
@@ -21,9 +21,13 @@
         }
 
         #Header {
-            background-color: yellow;
+            background-color: ghostwhite;
             width: 100%;
             height: 40px;
+
+            background-image: url("@Url.Content("~/Content/Images/Logo.png")");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
         }
 
         #Main {
@@ -86,9 +90,8 @@
     </style>
 </head>
 <body>
-    <div id="Header">
-        
-    </div>
+    <nav id="Header">
+    </nav>
     <div id="Main">
         <div>
             <div id="TitleAndSloganWrapper">
