@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VolonterUA.Models.Localizations.IndexPage;
+using VolonterUA.Models.ViewModels.IndexPage;
 using VolonterUA.Models.ViewsModels;
 
 namespace VolonterUA.Controllers
