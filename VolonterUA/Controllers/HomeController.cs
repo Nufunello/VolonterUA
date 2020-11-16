@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using VolonterUA.Models.Localizations.IndexPage;
+using VolonterUA.Models.ViewsModels;
 
 namespace VolonterUA.Controllers
 {
@@ -11,7 +12,7 @@ namespace VolonterUA.Controllers
     {
         public ActionResult Index()
         {
-            return View(new IndexPageLocalizationUkraine());
+            return View(new IndexPageViewModel ( new IndexPageLocalizationUkraine() ));
         }
     }
 }
