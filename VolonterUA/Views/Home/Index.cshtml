@@ -1,4 +1,4 @@
-﻿@model VolonterUA.Models.ViewModels.IndexPage.IndexPageViewModel
+﻿@model VolonterUA.Models.Localizations.IndexPage.AIndexPageLocalization
 @{
     Layout = null;
 }
@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@Model.Localization.DocumentTitle</title>
+    <title>@Model.DocumentTitle</title>
     <style>
         html, body {
             width: 100%;
@@ -133,16 +133,16 @@
     <nav id="Header">
         <ul>
             <li>
-                <a href="/info/aboutUs">@Model.Localization.AboutUs</a>
+                <a href="/info/aboutUs">@Model.AboutUs</a>
             </li>
             <li>
-                <a href="/personal/signIn">@Model.Localization.SignIn</a>
+                <a href="/personal/signIn">@Model.SignIn</a>
             </li>
             <li>
-                <a href="/volonter/search">@Model.Localization.VolonterEventNearBy</a>
+                <a href="/volonter/search">@Model.VolonterEventNearBy</a>
             </li>
             <li>
-                <a href="/volonter/orginize">@Model.Localization.OrginizeVolonterEvent</a>
+                <a href="/volonter/orginize">@Model.OrginizeVolonterEvent</a>
             </li>
         </ul>
     </nav>
@@ -150,18 +150,18 @@
         <div>
             <div id="TitleAndSloganWrapper">
                 <div id="TitleWrapper">
-                    <h1 id="Title">@Model.Localization.Title</h1>
+                    <h1 id="Title">@Model.Title</h1>
                 </div>
                 <div id="SloganWrapper">
-                    <h3 id="Slogan">@Model.Localization.Slogan</h3>
+                    <h3 id="Slogan">@Model.Slogan</h3>
                 </div>
             </div>
             <div id="SignUpAsButtons">
                 <div class="SignUpAsButtonWrapper">
-                    <a href="/personal/signUp?type=Volonter" class="SignUpAsButton" id="SignUpAsVoloterButton">@Model.Localization.WantToHelp</a>
+                    <a href="/personal/signUp?type=Volonter" class="SignUpAsButton" id="SignUpAsVoloterButton">@Model.WantToHelp</a>
                 </div>
                 <div class="SignUpAsButtonWrapper">
-                    <a href="/personal/signUp?type=VolonterOrganization" class="SignUpAsButton" id="SignUpAsVoloterOrganizationButton">@Model.Localization.SearchForVolonters</a>
+                    <a href="/personal/signUp?type=VolonterOrganization" class="SignUpAsButton" id="SignUpAsVoloterOrganizationButton">@Model.SearchForVolonters</a>
                 </div>
             </div>
         </div>

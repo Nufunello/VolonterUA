@@ -159,14 +159,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Localizations\ALocalization.cs" />
     <Compile Include="Models\Localizations\IndexPage\AIndexPageLocalization.cs" />
     <Compile Include="Models\Localizations\IndexPage\IndexPageLocalizationUkraine.cs" />
-    <Compile Include="Models\ViewModels\APageViewModel.cs" />
-    <Compile Include="Models\ViewModels\IndexPage\IndexPageViewModel.cs" />
     <Compile Include="Models\Localizations\Personal\APersonalSignUpVolonterOrganizationPageLocalization.cs" />
     <Compile Include="Models\Localizations\Personal\APersonalSignUpVolonterPageLocalization.cs" />
     <Compile Include="Models\Personal\SignUpVolonterModel.cs" />
