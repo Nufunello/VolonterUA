@@ -1,0 +1,15 @@
+﻿@model VolonterUA.Models.ViewModels.Personal.SignUpVolonterPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (@Html.BeginForm())
+{
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginDataModel.Login)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginDataModel.Login)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.Login, Model.Localization.LoginErrorMessage)
+
+    <input type="submit" value="Register" />
+}
