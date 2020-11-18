@@ -21,6 +21,7 @@ namespace VolonterUA.Models.Database
         public virtual string LastName { get; set; }
         [Required]
         [AdultHood]
+        [DataType(DataType.Date)]
         public virtual DateTime Birthdate { get; set; }
         [Required]
         [RegularExpression(@"^\s\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s$")]
