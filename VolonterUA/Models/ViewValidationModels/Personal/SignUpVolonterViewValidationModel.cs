@@ -10,7 +10,6 @@ namespace VolonterUA.Models.ViewValidationModels.Personal
     public class SignUpVolonterViewValidationModel
         : AViewValidationModel
     {
-        [Required]
         public UserLoginDataModel UserLoginDataModel { get; set; }
     }
 }
