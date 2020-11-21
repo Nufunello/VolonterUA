@@ -23,6 +23,10 @@
     @Html.EditorFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.LastName)
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.LastName, Model.Localization.LastNameErrorMessage)
 
+    @Html.LabelFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.Birthdate)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.Birthdate, new { htmlAttributes = new { @class = "dateTimePicker form-control" } })
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.Birthdate, Model.Localization.BirthdateError)
+
     @Html.LabelFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.PhoneNumber)
     @Html.EditorFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.PhoneNumber)
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
