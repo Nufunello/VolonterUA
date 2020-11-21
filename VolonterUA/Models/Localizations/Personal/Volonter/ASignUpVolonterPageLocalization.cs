@@ -8,6 +8,7 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
     public abstract class ASignUpVolonterPageLocalization
         : ALocalization
     {
+        protected string SpecialSymbols => "$&+,:;=?@#|'<>.^*()%!-";
         protected abstract string LoginErrorMessageLength(int minLength, int maxLength);
         protected abstract string PasswordErrorMessageLength(int minLength, int maxLength);
         protected abstract string FirstNameErrorMessageLength(int maxLength);

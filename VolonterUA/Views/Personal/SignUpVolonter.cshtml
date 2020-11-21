@@ -12,7 +12,7 @@
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.Login, Model.Localization.LoginErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginDataModel.Password)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginDataModel.Password)
+    @Html.PasswordFor(model => model.ValidationModel.UserLoginDataModel.Password)
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginDataModel.Password, Model.Localization.PasswordErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginDataModel.UserInfo.FirstName)

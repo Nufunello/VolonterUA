@@ -13,7 +13,7 @@ namespace VolonterUA.Models.Database
         [Required]
         public virtual UserInfoModel UserInfo { get; set; }
         [Required]
-        [RegularExpression(@"^\s[a-zA-Z]+\s$")]
+        [RegularExpression(@"^\s*[a-zA-Z]+\s*$")]
         [StringLength(maximumLength: 20, MinimumLength = 8)]
         public virtual string Login { get; set; }
         [Required]
