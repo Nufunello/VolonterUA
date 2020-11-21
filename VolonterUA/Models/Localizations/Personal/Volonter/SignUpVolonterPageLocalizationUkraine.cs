@@ -25,7 +25,7 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
         }
         protected override string PasswordErrorMessageLength(int minLength, int maxLength)
         {
-            return $"Логін повинен складатися мінімум з {minLength} максимум {maxLength} символів та мати в собі лише і хоча б по одній: " +
+            return $"Пароль повинен складатися мінімум з {minLength} максимум {maxLength} символів та мати в собі лише і хоча б по одній: " +
             $"латинські букви(велика та маленька), цифрі та спеціальному символу({SpecialSymbols})";
         }
     }
