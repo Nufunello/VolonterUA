@@ -5,8 +5,8 @@ using System.Web;
 
 namespace VolonterUA.Models.Localizations.Personal.Volonter
 {
-    public class SignUpVolonterPageLocalizationUkraine
-        : ASignUpVolonterPageLocalization
+    public class RegisterVolonterPageLocalizationUkraine
+        : ARegisterVolonterPageLocalization
     {
         public override string DocumentTitle => "Зарєєструватися як волонтер";
         public override string PhoneNumberErrorMessage => "Номер повинен бути вигляду +380{номер оператора}... або 380{номер оператора}... або 0{номер оператора}...";

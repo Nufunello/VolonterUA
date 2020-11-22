@@ -8,14 +8,16 @@ using VolonterUA.Models.ViewValidationModels.Personal;
 
 namespace VolonterUA.Models.ViewModels.Personal
 {
-    public class SignUpVolonterPageViewModel
-        : APageViewModel<ASignUpVolonterPageLocalization>
+    public class RegisterVolonterPageViewModel
+        : APageViewModel<ARegisterVolonterPageLocalization>
     {
-        public SignUpVolonterPageViewModel(ASignUpVolonterPageLocalization localization) 
+        public RegisterVolonterPageViewModel()
+        { }
+        public RegisterVolonterPageViewModel(ARegisterVolonterPageLocalization localization) 
             : base(localization)
         {
         }
 
-        public SignUpVolonterViewValidationModel ValidationModel { get; }
+        public RegisterVolonterViewValidationModel ValidationModel { get; }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model VolonterUA.Models.ViewModels.Personal.RegisterVolonterPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (@Html.BeginForm())
+{
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.Login)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginErrorMessage)
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.Password)
+    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordErrorMessage)
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameErrorMessage)
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameErrorMessage)
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, new { htmlAttributes = new { @class = "dateTimePicker form-control" } })
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateError)
+
+    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber)
+    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
+
+    <input type="submit" value="Register" />
+}

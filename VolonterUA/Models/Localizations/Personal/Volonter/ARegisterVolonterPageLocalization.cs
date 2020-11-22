@@ -5,7 +5,7 @@ using System.Web;
 
 namespace VolonterUA.Models.Localizations.Personal.Volonter
 {
-    public abstract class ASignUpVolonterPageLocalization
+    public abstract class ARegisterVolonterPageLocalization
         : ALocalization
     {
         protected string SpecialSymbols => "$&+,:;=?@#|'<>.^*()%!-";
