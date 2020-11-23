@@ -4,31 +4,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (@Html.BeginForm())
-{
+<script>
+    function PostRequest() {
+        if ($('#RegisterForm').valid()) {
+            var UserInfo = {
+                FirstName: document.getElementById("firstName").value,
+                LastName: document.getElementById("lastName").value,
+                Birthdate: document.getElementById("birthdate").value,
+                PhoneNumber: document.getElementById("phoneNumber").value
+            };
+            var UserLoginData = {
+                Login: document.getElementById("login").value,
+                Password: document.getElementById("password").value,
+                UserInfo: UserInfo
+            };
+            var ValidationModel = { UserLoginData: UserLoginData };
+
+            $.ajax({
+                url: "/personal/volonter/register",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(ValidationModel)
+            });
+        }
+    };
+</script>
+
+<form id="RegisterForm">
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.Login)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login, new { htmlAttributes = new { id = "login" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.Password)
-    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password)
+    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password, new { id = "password" } )
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, new { htmlAttributes = new { id = "firstName" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, new { htmlAttributes = new { id = "lastName" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, new { htmlAttributes = new { @class = "dateTimePicker form-control" } })
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, new { htmlAttributes = new { id = "birthdate", htmlAttributes = new { @class = "dateTimePicker form-control" } } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateError)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber)
+    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, new { htmlAttributes = new { id = "phoneNumber" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
 
-    <input type="submit" value="Register" />
-}
+    <input type="button" value="Register" onclick="PostRequest()" />
+</form>

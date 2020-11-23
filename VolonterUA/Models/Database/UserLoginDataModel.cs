@@ -8,7 +8,6 @@ namespace VolonterUA.Models.Database
 {
     public class UserLoginDataModel
     {
-        [ScaffoldColumn(false)]
         public virtual int Id { get; set; }
         [Required]
         public virtual UserInfoModel UserInfo { get; set; }

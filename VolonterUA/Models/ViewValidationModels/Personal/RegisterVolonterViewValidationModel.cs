@@ -10,6 +10,7 @@ namespace VolonterUA.Models.ViewValidationModels.Personal
     public class RegisterVolonterViewValidationModel
         : AViewValidationModel
     {
+        [Required]
         public UserLoginDataModel UserLoginData { get; set; }
     }
 }

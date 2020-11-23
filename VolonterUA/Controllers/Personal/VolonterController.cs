@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using VolonterUA.Models.Database;
 using VolonterUA.Models.Localizations.Personal.Volonter;
 using VolonterUA.Models.ViewModels.Personal;
 using VolonterUA.Models.ViewValidationModels.Personal;
@@ -7,13 +9,13 @@ namespace VolonterUA.Controllers
 {
     public class VolonterController : Controller
     {
-        public ActionResult Register(RegisterVolonterPageViewModel da)
+        public ActionResult Register()
         {
             return View("~/Views/Personal/RegisterVolonter.cshtml", new RegisterVolonterPageViewModel(new RegisterVolonterPageLocalizationUkraine()));
         }
 
         [HttpPost]
-        public ActionResult Register(FormCollection form)
+        public ActionResult Register(RegisterVolonterViewValidationModel model)
         {
             if (ModelState.IsValid)
             {
@@ -22,7 +24,8 @@ namespace VolonterUA.Controllers
             }
             else
             {
-                return Json(new { status = "Error", message = "Error while registering volonter" });
+                var errors = string.Join(",", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+                return Json(new { status = "Error", message = errors });
             }
         }
     }
