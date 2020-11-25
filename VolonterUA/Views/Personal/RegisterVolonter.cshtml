@@ -1,42 +1,18 @@
-﻿@model VolonterUA.Models.ViewModels.Personal.RegisterVolonterPageViewModel
+﻿
+@model VolonterUA.Models.ViewModels.Personal.RegisterVolonterPageViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
-    function PostRequest() {
-        if ($('#RegisterForm').valid()) {
-            var UserInfo = {
-                FirstName: document.getElementById("firstName").value,
-                LastName: document.getElementById("lastName").value,
-                Birthdate: document.getElementById("birthdate").value,
-                PhoneNumber: document.getElementById("phoneNumber").value
-            };
-            var UserLoginData = {
-                Login: document.getElementById("login").value,
-                Password: document.getElementById("password").value,
-                UserInfo: UserInfo
-            };
-            var ValidationModel = { UserLoginData: UserLoginData };
-
-            $.ajax({
-                url: "/personal/volonter/register",
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(ValidationModel)
-            });
-        }
-    };
-</script>
-
-<form id="RegisterForm">
+@using (@Html.BeginForm())
+{
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.Login)
     @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login, new { htmlAttributes = new { id = "login" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.Password)
-    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password, new { id = "password" } )
+    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password, new { id = "password" })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordErrorMessage)
 
     @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName)
@@ -55,5 +31,5 @@
     @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, new { htmlAttributes = new { id = "phoneNumber" } })
     @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
 
-    <input type="button" value="Register" onclick="PostRequest()" />
-</form>
+    <input type="submit" value="Register" />
+}

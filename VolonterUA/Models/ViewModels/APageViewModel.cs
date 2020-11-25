@@ -9,6 +9,10 @@ namespace VolonterUA.Models.ViewsModels
 {
     public abstract class APageViewModel<T> where T : ALocalization
     {
+        protected APageViewModel()
+        {
+
+        }
         protected APageViewModel(T localization)
         {
             Localization = localization;

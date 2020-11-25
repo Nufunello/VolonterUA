@@ -15,7 +15,7 @@ namespace VolonterUA.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterVolonterViewValidationModel model)
+        public ActionResult Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
         {
             if (ModelState.IsValid)
             {

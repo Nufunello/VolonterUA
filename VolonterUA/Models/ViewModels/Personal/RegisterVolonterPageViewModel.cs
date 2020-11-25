@@ -12,6 +12,8 @@ namespace VolonterUA.Models.ViewModels.Personal
     public class RegisterVolonterPageViewModel
         : APageViewModel<ARegisterVolonterPageLocalization>
     {
+        public RegisterVolonterPageViewModel()
+        { }
         public RegisterVolonterPageViewModel(ARegisterVolonterPageLocalization localization) 
             : base(localization)
         {
