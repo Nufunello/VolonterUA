@@ -29,7 +29,7 @@ namespace VolonterUA.Controllers
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && !User.Identity.IsAuthenticated)
             {
                 using (var context = new VolonterUAContext())
                 {
