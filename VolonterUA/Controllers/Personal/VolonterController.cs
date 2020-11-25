@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using VolonterUA.Models.Database;
 using VolonterUA.Models.Localizations.Personal.Volonter;
@@ -9,18 +14,40 @@ namespace VolonterUA.Controllers
 {
     public class VolonterController : Controller
     {
+        public VolonterController()
+        {
+
+        }
+
         public ActionResult Register()
         {
-            return View("~/Views/Personal/RegisterVolonter.cshtml", new RegisterVolonterPageViewModel(new RegisterVolonterPageLocalizationUkraine()));
+            return User.Identity.IsAuthenticated
+                ? Redirect("/Home/Index")
+                : (ActionResult)View("~/Views/Personal/RegisterVolonter.cshtml", new RegisterVolonterPageViewModel(new RegisterVolonterPageLocalizationUkraine()));
         }
 
         [HttpPost]
-        public ActionResult Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
+        public async System.Threading.Tasks.Task<ActionResult> Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
         {
             if (ModelState.IsValid)
             {
-
-                return Redirect("/Home/Index");
+                using (var context = new VolonterUAContext())
+                {
+                    var userManager = context.UserManager;
+                    var user = new IdentityUser
+                    {
+                        UserName = model.ValidationModel.UserLoginData.Login,
+                        PasswordHash = model.ValidationModel.UserLoginData.Password
+                    };
+                    var result = await userManager.CreateAsync(user);
+                    if (result.Succeeded)
+                    {
+                        var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
+                        await signInManager.SignInAsync(user, false, true);
+                        return Redirect("/Home/Index");
+                    }
+                }
+                return Json(new { status = "Error" });
             }
             else
             {
