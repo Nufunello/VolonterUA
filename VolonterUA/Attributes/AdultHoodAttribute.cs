@@ -5,15 +5,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using VolonterUA.Models.Database;
 
 namespace VolonterUA.Attributes
 {
     public class AdultHoodAttribute : ValidationAttribute, IClientValidatable
     {
         private static int AdultYears => 18;
+        public AdultHoodAttribute() 
+            : base("Adulthood parameter required")
+        { }
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            DateTime? val = value as DateTime?;
+            var val = value as DateTime?;
             return (val != null && DateTime.Now.AddDays(-AdultYears) >= val) ? ValidationResult.Success : new ValidationResult("");
         }
 

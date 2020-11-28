@@ -9,7 +9,6 @@ namespace VolonterUA.Models.Database
 {
     public class UserInfoModel
     {
-        [ScaffoldColumn(false)]
         public virtual int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 30)]

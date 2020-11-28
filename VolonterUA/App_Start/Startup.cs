@@ -1,7 +1,8 @@
 ﻿using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
-using System.Threading.Tasks;
 using VolonterUA.Models.Database;
 
 [assembly: OwinStartup(typeof(VolonterUA.App_Start.Startup))]
@@ -16,6 +17,15 @@ namespace VolonterUA.App_Start
             {
                 context.Database.Initialize(false);
             }
+
+            var authOptions = new CookieAuthenticationOptions
+            {
+                AuthenticationType = Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/personal/volonter/login"),
+                LogoutPath = new PathString("/personal/volonter/logout"),
+                ExpireTimeSpan = TimeSpan.FromMinutes(5),
+            };
+            app.UseCookieAuthentication(authOptions);
         }
     }
 }

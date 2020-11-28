@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style type="text/css">
+        .field-validation-valid {
+            display: none;
+        }
+
+        .validation-summary-valid {
+            display: none;
+        }
+
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #Header {
+            display: flex;
+            justify-content: space-between;
+            background-color: ghostwhite;
+            width: 100%;
+            height: 40px;
+        }
+
+        #logoHref {
+            width: 200px;
+            height: 100%;
+
+            background-image: url("@Url.Content("~/Content/Images/Logo.png")");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #logoHref > a {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        #Main {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+
+            background-image: url("@Url.Content("~/Content/Images/TwoHelpHands.jpg")");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #Main > div {
+            min-width: 550px;
+            width: 45%;
+            max-height: 50%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .label {
+            display: block;
+            font-size: large;
+            text-align: center;
+            color: black;
+        }
+
+        .text-box {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        #password {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        form {
+            background-color: hsla(57, 92%, 73%, 0.92);
+        }
+
+        form > div{
+            padding: 20px;
+        }
+
+        form > div > div {
+            padding: 5px;
+        }
+
+    </style>
+
+    @Scripts.Render("~/jQuery")
+    @Scripts.Render("~/jQueryValidate")
+    @Scripts.Render("~/Unobtrusive")
+    @Scripts.Render("~/AdultHoodValidation")
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

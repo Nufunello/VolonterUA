@@ -7,9 +7,10 @@ using VolonterUA.Models.Database;
 
 namespace VolonterUA.Models.ViewValidationModels.Personal
 {
-    public class SignUpVolonterViewValidationModel
+    public class RegisterVolonterViewValidationModel
         : AViewValidationModel
     {
-        public UserLoginDataModel UserLoginDataModel { get; set; }
+        [Required]
+        public UserLoginDataModel UserLoginData { get; set; }
     }
 }

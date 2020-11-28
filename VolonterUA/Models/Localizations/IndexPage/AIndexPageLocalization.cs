@@ -16,6 +16,7 @@ namespace VolonterUA.Models.Localizations.IndexPage
         public abstract string AboutUs { get; }
         public abstract string VolonterEventNearBy { get; }
         public abstract string SignIn { get; }
+        public abstract string SignOut { get; }
         public abstract string OrginizeVolonterEvent { get; }
     }
 }

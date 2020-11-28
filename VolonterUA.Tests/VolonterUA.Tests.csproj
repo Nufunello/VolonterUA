@@ -107,6 +107,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VolonterUA\VolonterUA.csproj">
+      <Project>{c5a06e3c-9a45-4cb0-9667-f6fa386706d4}</Project>
+      <Name>VolonterUA</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

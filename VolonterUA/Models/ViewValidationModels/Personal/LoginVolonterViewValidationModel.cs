@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace VolonterUA.Models.Database
+namespace VolonterUA.Models.ViewValidationModels.Personal
 {
-    public class UserLoginDataModel
+    public class LoginVolonterViewValidationModel
+        : AViewValidationModel
     {
-        public virtual int Id { get; set; }
-        [Required]
-        public virtual UserInfoModel UserInfo { get; set; }
         [Required]
         [RegularExpression(@"^\s*[a-zA-Z]+\s*$")]
         [StringLength(maximumLength: 20, MinimumLength = 8)]
