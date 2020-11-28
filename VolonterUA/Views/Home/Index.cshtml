@@ -22,13 +22,25 @@
         }
 
         #Header {
+            display: flex;
+            justify-content: space-between;
             background-color: ghostwhite;
             width: 100%;
             height: 40px;
+        }
+
+        #logoHref {
+            width: 200px;
+            height: 100%;
 
             background-image: url("@Url.Content("~/Content/Images/Logo.png")");
             background-repeat: no-repeat;
-            background-size: 100% 100%;
+            background-size: cover;
+        }
+        #logoHref > a {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
         }
 
         #Header > ul {
@@ -131,6 +143,9 @@
 </head>
 <body>
     <nav id="Header">
+        <div id="logoHref">
+            <a href="/Home/Index"></a>
+        </div>
         <ul>
             <li>
                 <a href="/info/aboutUs">@Model.Localization.AboutUs</a>

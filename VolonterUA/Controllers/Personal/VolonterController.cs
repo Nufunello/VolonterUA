@@ -35,19 +35,12 @@ namespace VolonterUA.Controllers
                 using (var context = new VolonterUAContext())
                 {
                     var userManager = context.UserManager;
-                    try
+                    var user = userManager.FindByName(model.ValidationModel.Login);
+                    if (user.PasswordHash == model.ValidationModel.Password)
                     {
-                        var user = userManager.FindByName(model.ValidationModel.Login);
-                        if (user.PasswordHash == model.ValidationModel.Password)
-                        {
-                            var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
-                            await signInManager.SignInAsync(user, false, false);
-                            return Redirect(AuthenticatedRedirect);
-                        }
-                    }
-                    catch(Exception)
-                    {
-                        return Json(new { status = "User not found" });
+                        var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
+                        await signInManager.SignInAsync(user, false, false);
+                        return Redirect(AuthenticatedRedirect);
                     }
                 }
                 return Json(new { status = "Invalid credentials" });

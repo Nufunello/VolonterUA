@@ -2,34 +2,56 @@
 @model VolonterUA.Models.ViewModels.Personal.RegisterVolonterPageViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "./_Layout.cshtml";
 }
 
-@using (@Html.BeginForm())
-{
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginLabel)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login, new { htmlAttributes = new { id = "login" } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginErrorMessage)
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
 
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordLabel)
-    @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password, new { id = "password" })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordErrorMessage)
+<div id="Main">
+    @using (@Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.UserLoginData.Login, new { htmlAttributes = new { id = "login" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Login, Model.Localization.LoginErrorMessage)
+        </div>
 
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameLabel)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, new { htmlAttributes = new { id = "firstName" } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameErrorMessage)
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordLabel, new { @class = "label" })
+            @Html.PasswordFor(model => model.ValidationModel.UserLoginData.Password, new { id = "password" })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.Password, Model.Localization.PasswordErrorMessage)
+        </div>
 
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameLabel)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, new { htmlAttributes = new { id = "lastName" } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameErrorMessage)
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, new { htmlAttributes = new { id = "firstName" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.FirstName, Model.Localization.FirstNameErrorMessage)
+        </div>
 
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateLabel)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, new { htmlAttributes = new { id = "birthdate", htmlAttributes = new { @class = "dateTimePicker form-control" } } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateError)
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, new { htmlAttributes = new { id = "lastName" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.LastName, Model.Localization.LastNameErrorMessage)
+        </div>
 
-    @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberLabel)
-    @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, new { htmlAttributes = new { id = "phoneNumber" } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, new { htmlAttributes = new { id = "birthdate", htmlAttributes = new { @class = "dateTimePicker form-control" } } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.Birthdate, Model.Localization.BirthdateError)
+        </div>
 
-    <input type="submit" value="Register" />
-}
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, new { htmlAttributes = new { id = "phoneNumber" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.UserLoginData.UserInfo.PhoneNumber, Model.Localization.PhoneNumberErrorMessage)
+        </div>
+
+        <div>
+            <input type="submit" value="@Model.Localization.ToRegister" />
+        </div>
+    }
+</div>

@@ -2,18 +2,32 @@
 @model VolonterUA.Models.ViewModels.Personal.LoginVolonterPageViewModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "./_Layout.cshtml";
 }
 
-@using (@Html.BeginForm())
-{
-    @Html.LabelFor(model => model.ValidationModel.Login, Model.Localization.LoginLabel)
-    @Html.EditorFor(model => model.ValidationModel.Login, new { htmlAttributes = new { id = "login" } })
-    @Html.ValidationMessageFor(model => model.ValidationModel.Login, Model.Localization.LoginErrorMessage)
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
 
-    @Html.LabelFor(model => model.ValidationModel.Password, Model.Localization.PasswordLabel)
-    @Html.PasswordFor(model => model.ValidationModel.Password, new { id = "password" })
-    @Html.ValidationMessageFor(model => model.ValidationModel.Password, Model.Localization.PasswordErrorMessage)
+<div id="Main">
+    @using (@Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.Login, Model.Localization.LoginLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.Login, new { htmlAttributes = new { id = "login" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.Login, Model.Localization.LoginErrorMessage)
+        </div>
 
-    <input type="submit" value="SignIn" />
-}
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.Password, Model.Localization.PasswordLabel, new { @class = "label" })
+            @Html.PasswordFor(model => model.ValidationModel.Password, new { id = "password" })
+            @Html.ValidationMessageFor(model => model.ValidationModel.Password, Model.Localization.PasswordErrorMessage)
+        </div>
+
+        <div>
+            <input type="submit" value="@Model.Localization.ToLogin" />
+        </div>
+    }
+</div>

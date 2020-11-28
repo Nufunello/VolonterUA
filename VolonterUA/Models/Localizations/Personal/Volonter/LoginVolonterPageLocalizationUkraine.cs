@@ -13,6 +13,8 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
 
         public override string DocumentTitle => "Увійти";
 
+        public override string ToLogin => DocumentTitle;
+
         protected override string LoginErrorMessageLength(int minLength, int maxLength)
         {
             return $"Логін має складатись лише з латинських букв і мати розмір від {minLength} до {maxLength} символів";

@@ -18,6 +18,7 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
         public string PasswordErrorMessage => PasswordErrorMessageLength(8, 20);
         public string FirstNameErrorMessage => FirstNameErrorMessageLength(30);
         public string LastNameErrorMessage => LastNameErrorMessageLength(30);
+        public abstract string ToRegister { get; }
         public abstract string PhoneNumberErrorMessage { get; }
         public abstract string BirthdateError { get; }
         public abstract string LoginLabel { get; }

@@ -17,6 +17,8 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
         public override string LastNameLabel => "Прізвище";
         public override string BirthdateLabel => "День народження";
         public override string PhoneNumberLabel => "Номер телефону";
+        public override string ToRegister => DocumentTitle;
+
         protected override string FirstNameErrorMessageLength(int maxLength)
         {
             return $"Ім'я може бути до {maxLength} символів(тільки латинськими або тільки українськи буквами), у випадку якщо у вас подвійне введіть через дефіс \"-\"";

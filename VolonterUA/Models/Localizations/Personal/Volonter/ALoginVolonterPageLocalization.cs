@@ -16,5 +16,6 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
         public string PasswordErrorMessage => PasswordErrorMessageLength(8, 20);
         public abstract string LoginLabel { get; }
         public abstract string PasswordLabel { get; }
+        public abstract string ToLogin { get; }
     }
 }
