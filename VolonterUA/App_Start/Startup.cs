@@ -23,7 +23,7 @@ namespace VolonterUA.App_Start
                 AuthenticationType = Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/personal/volonter/login"),
                 LogoutPath = new PathString("/personal/volonter/logout"),
-                ExpireTimeSpan = TimeSpan.FromDays(7),
+                ExpireTimeSpan = TimeSpan.FromMinutes(5),
             };
             app.UseCookieAuthentication(authOptions);
         }

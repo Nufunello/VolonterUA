@@ -19,6 +19,12 @@ namespace VolonterUA.Controllers
 
         }
 
+        public ActionResult SignOut()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return Redirect("/Home/Index");
+        }
+
         public ActionResult Register()
         {
             return User.Identity.IsAuthenticated
@@ -43,7 +49,7 @@ namespace VolonterUA.Controllers
                     if (result.Succeeded)
                     {
                         var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
-                        await signInManager.SignInAsync(user, false, true);
+                        await signInManager.SignInAsync(user, false, false);
                         return Redirect("/Home/Index");
                     }
                 }
