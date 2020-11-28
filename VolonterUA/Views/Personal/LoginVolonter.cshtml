@@ -15,19 +15,21 @@
     @using (@Html.BeginForm())
     {
         <div>
-            @Html.LabelFor(model => model.ValidationModel.Login, Model.Localization.LoginLabel, new { @class = "label" })
-            @Html.EditorFor(model => model.ValidationModel.Login, new { htmlAttributes = new { id = "login" } })
-            @Html.ValidationMessageFor(model => model.ValidationModel.Login, Model.Localization.LoginErrorMessage)
-        </div>
+            <div>
+                @Html.LabelFor(model => model.ValidationModel.Login, Model.Localization.LoginLabel, new { @class = "label" })
+                @Html.EditorFor(model => model.ValidationModel.Login, new { htmlAttributes = new { id = "login" } })
+                @Html.ValidationMessageFor(model => model.ValidationModel.Login, Model.Localization.LoginErrorMessage)
+            </div>
 
-        <div>
-            @Html.LabelFor(model => model.ValidationModel.Password, Model.Localization.PasswordLabel, new { @class = "label" })
-            @Html.PasswordFor(model => model.ValidationModel.Password, new { id = "password" })
-            @Html.ValidationMessageFor(model => model.ValidationModel.Password, Model.Localization.PasswordErrorMessage)
-        </div>
+            <div>
+                @Html.LabelFor(model => model.ValidationModel.Password, Model.Localization.PasswordLabel, new { @class = "label" })
+                @Html.PasswordFor(model => model.ValidationModel.Password, new { id = "password" })
+                @Html.ValidationMessageFor(model => model.ValidationModel.Password, Model.Localization.PasswordErrorMessage)
+            </div>
 
-        <div>
-            <input type="submit" id="loginButton" value="@Model.Localization.ToLogin" />
+            <div>
+                <input type="submit" id="loginButton" value="@Model.Localization.ToLogin" />
+            </div>
         </div>
     }
 </div>
