@@ -374,12 +374,16 @@
     <Compile Include="Models\Localizations\ALocalization.cs" />
     <Compile Include="Models\Localizations\IndexPage\AIndexPageLocalization.cs" />
     <Compile Include="Models\Localizations\IndexPage\IndexPageLocalizationUkraine.cs" />
+    <Compile Include="Models\Localizations\Personal\Volonter\ALoginVolonterPageLocalization.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\ARegisterVolonterPageLocalization.cs" />
+    <Compile Include="Models\Localizations\Personal\Volonter\LoginVolonterPageLocalizationUkraine.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\RegisterVolonterPageLocalizationUkraine.cs" />
     <Compile Include="Models\ViewModels\APageViewModel.cs" />
     <Compile Include="Models\ViewModels\IndexPage\IndexPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\Personal\LoginVolonterPageViewModel.cs" />
     <Compile Include="Models\ViewModels\Personal\RegisterVolonterPageViewModel.cs" />
     <Compile Include="Models\ViewValidationModels\AViewValidationModel.cs" />
+    <Compile Include="Models\ViewValidationModels\Personal\LoginVolonterViewValidationModel.cs" />
     <Compile Include="Models\ViewValidationModels\Personal\RegisterVolonterViewValidationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -439,6 +443,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Personal\RegisterVolonter.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Personal\LoginVolonter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

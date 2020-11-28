@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,11 +15,51 @@ namespace VolonterUA.Controllers
 {
     public class VolonterController : Controller
     {
-        public VolonterController()
+        private string AuthenticatedRedirect => "/Home/Index";
+        public ActionResult SignIn()
         {
+            return User.Identity.IsAuthenticated
+                   ? Redirect(AuthenticatedRedirect)
+                   : (ActionResult)View("~/Views/Personal/LoginVolonter.cshtml", new LoginVolonterPageViewModel(new LoginVolonterPageLocalizationUkraine()));
+        }
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> SignIn([Microsoft.AspNetCore.Mvc.FromForm] LoginVolonterPageViewModel model)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(new { status = "Already authorized" });
+            }
 
+            if (ModelState.IsValid)
+            {
+                using (var context = new VolonterUAContext())
+                {
+                    var userManager = context.UserManager;
+                    try
+                    {
+                        var user = userManager.FindByName(model.ValidationModel.Login);
+                        if (user.PasswordHash == model.ValidationModel.Password)
+                        {
+                            var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
+                            await signInManager.SignInAsync(user, false, false);
+                            return Redirect(AuthenticatedRedirect);
+                        }
+                    }
+                    catch(Exception)
+                    {
+                        return Json(new { status = "User not found" });
+                    }
+                }
+                return Json(new { status = "Invalid credentials" });
+            }
+            else
+            {
+                var errors = string.Join(",", ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage));
+                return Json(new { status = "Error", message = errors });
+            }
         }
 
+        [Authorize]
         public ActionResult SignOut()
         {
             HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
@@ -28,14 +69,19 @@ namespace VolonterUA.Controllers
         public ActionResult Register()
         {
             return User.Identity.IsAuthenticated
-                ? Redirect("/Home/Index")
+                ? Redirect(AuthenticatedRedirect)
                 : (ActionResult)View("~/Views/Personal/RegisterVolonter.cshtml", new RegisterVolonterPageViewModel(new RegisterVolonterPageLocalizationUkraine()));
         }
 
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
         {
-            if (ModelState.IsValid && !User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
+            {
+                return Json(new { status = "Already authorized" });
+            }
+
+            if (ModelState.IsValid)
             {
                 using (var context = new VolonterUAContext())
                 {
@@ -50,7 +96,7 @@ namespace VolonterUA.Controllers
                     {
                         var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
                         await signInManager.SignInAsync(user, false, false);
-                        return Redirect("/Home/Index");
+                        return Redirect(AuthenticatedRedirect);
                     }
                 }
                 return Json(new { status = "Error" });
