@@ -89,6 +89,8 @@ namespace VolonterUA.Controllers
                     {
                         var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
                         await signInManager.SignInAsync(user, false, false);
+                        context.UserLoginDatas.Add(model.ValidationModel.UserLoginData);
+                        context.SaveChanges();
                         return Redirect(AuthenticatedRedirect);
                     }
                 }
