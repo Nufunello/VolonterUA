@@ -136,7 +136,14 @@
                 <a href="/info/aboutUs">@Model.Localization.AboutUs</a>
             </li>
             <li>
-                <a href="/personal/signIn">@Model.Localization.SignIn</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/personal/volonter/signout">@Model.Localization.SignOut</a>
+                }
+                else
+                {
+                    <a href="/personal/volonter/signin">@Model.Localization.SignIn</a>
+                }
             </li>
             <li>
                 <a href="/volonter/search">@Model.Localization.VolonterEventNearBy</a>
