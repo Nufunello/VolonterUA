@@ -34,8 +34,13 @@ namespace VolonterUA.Models.Database
         
         public Volonter AddVolonter(UserLoginDataModel userLoginData)
         {
+            UserManager.Create(new IdentityUser
+            {
+                UserName = userLoginData.Login,
+                PasswordHash = userLoginData.Password
+            });
             UserLoginDatas.Add(userLoginData);
-            var volonter = new Volonter { User = userLoginData.UserInfo, Karma = 0 };
+            var volonter = new Volonter { User = userLoginData.UserInfo };
             Volonters.Add(volonter);
             return volonter;
         }
