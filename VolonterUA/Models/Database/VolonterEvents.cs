@@ -21,12 +21,15 @@ namespace VolonterUA.Models.Database
         [Required]
         public virtual string TextDescription { get; set; }
         [Required]
+        public virtual DateTime Date { get; set; }
+        [Required]
         public virtual Address Address { get; set; }
     }
 
     public class VolonterEvent
     {
         public virtual int Id { get; set; }
+        [Required]
         public virtual ICollection<VolonterOrganization> Organizations { get; set; }
         [Required]
         public virtual Description Description { get; set; }
@@ -37,19 +40,24 @@ namespace VolonterUA.Models.Database
         public virtual int Id { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
-        public virtual ICollection<UserInfoModel> Subscribers { get; set; }
+        public virtual ICollection<Volonter> Subscribers { get; set; }
     }
 
-    public class InProgressVolonterEvent
+    public abstract class AStartedVolonterEvent
     {
         public virtual int Id { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
-        public virtual ICollection<UserInfoModel> VolontersAtEvent { get; set; }
+        public virtual ICollection<Volonter> VolontersAtEvent { get; set; }
+    }
+
+    public class InProgressVolonterEvent
+        : AStartedVolonterEvent
+    {
     }
 
     public class FinishedVolonterEvent
-        : InProgressVolonterEvent
+        : AStartedVolonterEvent
     {
         public virtual ICollection<EventFeedback> VolontersFeedbacks { get; set; }
     }

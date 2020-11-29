@@ -14,6 +14,7 @@ namespace VolonterUA.Models.Database
 
         public virtual DbSet<UserInfoModel> UserInfos { get; set; }
         public virtual DbSet<UserLoginDataModel> UserLoginDatas { get; set; }
+        public virtual DbSet<Volonter> Volonters { get; set; }
         public virtual DbSet<VolonterOrganization> VolonterOrganizations { get; set; }
 
         public virtual DbSet<VolonterEvent> VolonterEvents { get; set; }
@@ -29,16 +30,28 @@ namespace VolonterUA.Models.Database
 
         #endregion
 
+        #region UserMethods
+        
+        public Volonter AddVolonter(UserLoginDataModel userLoginData)
+        {
+            UserLoginDatas.Add(userLoginData);
+            var volonter = new Volonter { User = userLoginData.UserInfo, Karma = 0 };
+            Volonters.Add(volonter);
+            return volonter;
+        }
+
+        #endregion
+
         #region EventsMethods
 
         public UpcomingVolonterEvent PostEvent(VolonterEvent volonterEvent)
         {
             var upcomingVolonterEvent = new UpcomingVolonterEvent
             {
-                VolonterEvent = volonterEvent
+                VolonterEvent = volonterEvent,
+                Subscribers = new List<Volonter> { }
             };
             UpcomingVolonterEvents.Add(upcomingVolonterEvent);
-            SaveChanges();
             return upcomingVolonterEvent;
         }
 
@@ -46,24 +59,34 @@ namespace VolonterUA.Models.Database
         {
             var inProgressVolonterEvent = new InProgressVolonterEvent
             {
-                VolonterEvent = upcomingVolonterEvent.VolonterEvent
+                VolonterEvent = upcomingVolonterEvent.VolonterEvent,
+                VolontersAtEvent = new List<Volonter> { }
             };
             InProgressVolonterEvents.Add(inProgressVolonterEvent);
             UpcomingVolonterEvents.Remove(upcomingVolonterEvent);
-            SaveChanges();
             return inProgressVolonterEvent;
         }
 
         public FinishedVolonterEvent FinishEvent(InProgressVolonterEvent inProgressVolonterEvent)
         {
+            var volonters = inProgressVolonterEvent.VolontersAtEvent;
             var finishedVolonterEvent = new FinishedVolonterEvent
             {
                 VolonterEvent = inProgressVolonterEvent.VolonterEvent,
-                VolontersAtEvent = inProgressVolonterEvent.VolontersAtEvent
+                VolontersAtEvent = new List<Volonter> { }
             };
-            FinishedVolonterEvents.Add(finishedVolonterEvent);
+            foreach (var volonter in volonters)
+            {
+                finishedVolonterEvent.VolontersAtEvent.Add(volonter);
+            }
             InProgressVolonterEvents.Remove(inProgressVolonterEvent);
-            SaveChanges();
+
+            foreach (var volonter in finishedVolonterEvent.VolontersAtEvent)
+            {
+                volonter.Karma += 5;//5 - is default karma up from event
+            }
+
+            FinishedVolonterEvents.Add(finishedVolonterEvent);
             return finishedVolonterEvent;
         }
 

@@ -2,28 +2,19 @@
 
 namespace VolonterUA.Models.Database
 {
-    public enum Mark
-        : int
-    {
-        Zero = 0,
-        One,
-        Two,
-        Three,
-        Five
-    }
-
     public abstract class AFeedback
     {
         public virtual int Id { get; set; }
         [Required]
-        public virtual Mark Mark { get; set; }
+        [Range(1,10)]
+        public virtual int Mark { get; set; }
     }
 
     public class VolonterOrganizationFeedback
         : AFeedback
     {
         [Required]
-        public virtual UserInfoModel Volonter { get; set; }
+        public virtual Volonter Volonter { get; set; }
     }
 
     public class EventFeedback
