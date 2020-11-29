@@ -29,7 +29,7 @@ namespace VolonterUA.Models.Localizations.Personal.Volonter
         }
         protected override string LoginErrorMessageLength(int minLength, int maxLength)
         {
-            return $"Логін має складатись лише з латинських букв і мати розмір від {minLength} до {maxLength} символів";
+            return $"Логін має складатись лише з латинських букв або цифр, або знаку \"_\" і мати розмір від {minLength} до {maxLength} символів";
         }
         protected override string PasswordErrorMessageLength(int minLength, int maxLength)
         {

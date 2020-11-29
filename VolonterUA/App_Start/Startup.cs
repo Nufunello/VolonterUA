@@ -21,8 +21,8 @@ namespace VolonterUA.App_Start
             var authOptions = new CookieAuthenticationOptions
             {
                 AuthenticationType = Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/personal/volonter/login"),
-                LogoutPath = new PathString("/personal/volonter/logout"),
+                LoginPath = new PathString("/personal/volonter/signin"),
+                LogoutPath = new PathString("/personal/volonter/signout"),
                 ExpireTimeSpan = TimeSpan.FromMinutes(5),
             };
             app.UseCookieAuthentication(authOptions);

@@ -367,8 +367,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\Feedbacks.cs" />
     <Compile Include="Models\Database\UserInfoModel.cs" />
     <Compile Include="Models\Database\UserLoginDataModel.cs" />
+    <Compile Include="Models\Database\Volonter.cs" />
+    <Compile Include="Models\Database\VolonterEvents.cs" />
+    <Compile Include="Models\Database\VolonterOrganization.cs" />
     <Compile Include="Models\Database\VolonterUAContext.cs" />
     <Compile Include="Models\Database\VolonterUAContextInitializer.cs" />
     <Compile Include="Models\Localizations\ALocalization.cs" />

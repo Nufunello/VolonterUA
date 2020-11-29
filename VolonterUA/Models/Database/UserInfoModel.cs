@@ -7,6 +7,12 @@ using VolonterUA.Attributes;
 
 namespace VolonterUA.Models.Database
 {
+    public enum Activity
+    {
+        Volonter = 0,
+        Organization
+    }
+
     public class UserInfoModel
     {
         public virtual int Id { get; set; }
@@ -25,5 +31,6 @@ namespace VolonterUA.Models.Database
         [Required]
         [RegularExpression(@"^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$")]
         public virtual string PhoneNumber { get; set; }
+        public virtual Activity Activity { get; set; }
     }
 }
