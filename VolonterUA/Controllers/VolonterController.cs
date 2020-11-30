@@ -93,7 +93,7 @@ namespace VolonterUA.Controllers
                         context.UserLoginDatas.Add(loginData);
                         context.Volonters.Add(new Volonter { UserInfo = loginData.UserInfo });
                         context.SaveChanges();
-                        return Redirect(AuthenticatedRedirect);
+                        return Redirect("/VolonterEvent/Search");
                     }
                 }
                 return Json(new { status = "Error" });

@@ -10,7 +10,7 @@ namespace VolonterUA.Models.ViewValidationModels.Personal
         : AViewValidationModel
     {
         [Required]
-        [RegularExpression(@"^\s*[a-zA-Z]+\s*$")]
+        [RegularExpression(@"^\s*[a-z_A-Z0-9]+\s*$")]
         [StringLength(maximumLength: 20, MinimumLength = 8)]
         public virtual string Login { get; set; }
         [Required]

@@ -15,10 +15,17 @@ namespace VolonterUA.Controllers
         {
             using (var context = new VolonterUAContext())
             {
+                string fullname = "";
+                if (User.Identity.IsAuthenticated)
+                {
+                    var info = context.UserLoginDatas.First(x => x.Login == User.Identity.Name).UserInfo;
+                    fullname = $"{info.FirstName} {info.LastName}";
+                }
                 var view = View("~/Views/Home/VolonterHomePage.cshtml", new VolonterHomePageViewModel(
                             new VolonterHomePageLocalizationUkraine(),
                             context.UpcomingVolonterEvents.ToList(),
-                            context.InProgressVolonterEvents.ToList()
+                            context.InProgressVolonterEvents.ToList(),
+                            fullname
                         )
                 );
                 view.ExecuteResult(ControllerContext);

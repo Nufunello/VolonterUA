@@ -10,7 +10,7 @@ namespace VolonterUA.Models.Localizations.Home
     {
         public override string DocumentTitle => "Домашня сторінка";
 
-        public override string Location => "Місцезнаходження";
+        public override string Location => "Локація";
 
         public override string Upcoming => "Заплановані";
 
