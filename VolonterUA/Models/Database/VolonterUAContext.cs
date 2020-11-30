@@ -12,7 +12,7 @@ namespace VolonterUA.Models.Database
     {
         #region DbSets
 
-        public virtual DbSet<UserInfoModel> UserInfos { get; set; }
+        public virtual DbSet<UserInfo> UserInfos { get; set; }
         public virtual DbSet<UserLoginDataModel> UserLoginDatas { get; set; }
         public virtual DbSet<Volonter> Volonters { get; set; }
         public virtual DbSet<VolonterOrganization> VolonterOrganizations { get; set; }
@@ -23,7 +23,7 @@ namespace VolonterUA.Models.Database
         public virtual DbSet<FinishedVolonterEvent> FinishedVolonterEvents { get; set; }
 
         public virtual DbSet<Description> Descriptions { get; set; }
-        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Location> Addresses { get; set; }
 
         public virtual DbSet<EventFeedback> EventFeedbacks { get; set; }
         public virtual DbSet<VolonterOrganizationFeedback> VolonterOrganizationFeedbacks { get; set; }
@@ -39,9 +39,10 @@ namespace VolonterUA.Models.Database
                 UserName = userLoginData.Login,
                 PasswordHash = userLoginData.Password
             });
-            UserLoginDatas.Add(userLoginData);
-            var volonter = new Volonter { User = userLoginData.UserInfo };
+            UserLoginDatas.Add(userLoginData); ;
+            var volonter = new Volonter { UserInfo = userLoginData.UserInfo };
             Volonters.Add(volonter);
+            SaveChanges();
             return volonter;
         }
 
@@ -53,10 +54,10 @@ namespace VolonterUA.Models.Database
         {
             var upcomingVolonterEvent = new UpcomingVolonterEvent
             {
-                VolonterEvent = volonterEvent,
-                Subscribers = new List<Volonter> { }
+                VolonterEvent = volonterEvent
             };
             UpcomingVolonterEvents.Add(upcomingVolonterEvent);
+            SaveChanges();
             return upcomingVolonterEvent;
         }
 
@@ -65,33 +66,35 @@ namespace VolonterUA.Models.Database
             var inProgressVolonterEvent = new InProgressVolonterEvent
             {
                 VolonterEvent = upcomingVolonterEvent.VolonterEvent,
-                VolontersAtEvent = new List<Volonter> { }
+                Volonters = new List<Volonter> { }
             };
             InProgressVolonterEvents.Add(inProgressVolonterEvent);
             UpcomingVolonterEvents.Remove(upcomingVolonterEvent);
+            SaveChanges();
             return inProgressVolonterEvent;
         }
 
         public FinishedVolonterEvent FinishEvent(InProgressVolonterEvent inProgressVolonterEvent)
         {
-            var volonters = inProgressVolonterEvent.VolontersAtEvent;
+            var volonters = inProgressVolonterEvent.Volonters;
             var finishedVolonterEvent = new FinishedVolonterEvent
             {
                 VolonterEvent = inProgressVolonterEvent.VolonterEvent,
-                VolontersAtEvent = new List<Volonter> { }
+                Volonters = new List<Volonter> { }
             };
             foreach (var volonter in volonters)
             {
-                finishedVolonterEvent.VolontersAtEvent.Add(volonter);
+                finishedVolonterEvent.Volonters.Add(volonter);
             }
             InProgressVolonterEvents.Remove(inProgressVolonterEvent);
 
-            foreach (var volonter in finishedVolonterEvent.VolontersAtEvent)
+            foreach (var volonter in finishedVolonterEvent.Volonters)
             {
                 volonter.Karma += 5;//5 - is default karma up from event
             }
 
             FinishedVolonterEvents.Add(finishedVolonterEvent);
+            SaveChanges();
             return finishedVolonterEvent;
         }
 

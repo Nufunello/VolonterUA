@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using VolonterUA.Models.Localizations.IndexPage;
-using VolonterUA.Models.ViewModels.IndexPage;
-using VolonterUA.Models.ViewsModels;
+﻿using System.Web.Mvc;
+using VolonterUA.Models.Localizations.Home;
+using VolonterUA.Models.ViewModels.Home;
+
 
 namespace VolonterUA.Controllers
 {
@@ -13,7 +9,7 @@ namespace VolonterUA.Controllers
     {
         public ActionResult Index()
         {
-            return View(new IndexPageViewModel ( new IndexPageLocalizationUkraine() ));
+            return View(new IndexPageViewModel(new IndexPageLocalizationUkraine()));
         }
     }
 }

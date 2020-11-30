@@ -1,16 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VolonterUA.Models.Database
 {
     public class Volonter
     {
-        public virtual int Id { get; set; }
         [Required]
-        public virtual UserInfoModel User { get; set; }
-        public virtual ICollection<UpcomingVolonterEvent> SubscribedAt { get; set; }
-        public virtual ICollection<InProgressVolonterEvent> IsVolonteringAt { get; set; }
-        public virtual ICollection<FinishedVolonterEvent> WasVolonterAt { get; set; }
+        [Key]
+        [ForeignKey("UserInfo")]
+        public int UserInfoId { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
+        public virtual ICollection<UpcomingVolonterEvent> UpcomingVolonterEvents { get; set; }
+        public virtual ICollection<InProgressVolonterEvent> InProgressVolonterEvents { get; set; }
+        public virtual ICollection<FinishedVolonterEvent> FinishedVolonterEvents { get; set; }
         public virtual int Karma { get; set; }
     }
 }

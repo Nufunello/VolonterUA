@@ -62,7 +62,7 @@ namespace VolonterUA.Controllers
         public ActionResult Register()
         {
             return User.Identity.IsAuthenticated
-                ? Redirect(AuthenticatedRedirect)
+                ? Redirect("/VolonterEvent/Search")
                 : (ActionResult)View("~/Views/Personal/RegisterVolonter.cshtml", new RegisterVolonterPageViewModel(new RegisterVolonterPageLocalizationUkraine()));
         }
 
@@ -91,7 +91,7 @@ namespace VolonterUA.Controllers
                         var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
                         await signInManager.SignInAsync(user, false, false);
                         context.UserLoginDatas.Add(loginData);
-                        context.Volonters.Add(new Volonter { User = loginData.UserInfo });
+                        context.Volonters.Add(new Volonter { UserInfo = loginData.UserInfo });
                         context.SaveChanges();
                         return Redirect(AuthenticatedRedirect);
                     }

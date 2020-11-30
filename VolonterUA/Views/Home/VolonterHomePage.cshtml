@@ -1,0 +1,107 @@
+﻿@model VolonterUA.Models.ViewModels.Home.VolonterHomePageViewModel
+
+@{
+    ViewBag.Title = Model.Localization.DocumentTitle;
+    Layout = "~/Views/Personal/_Layout.cshtml";
+}
+
+<style>
+    #MainWrapper {
+        height: 90%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        background-color: hsla(57, 92%, 86%, 0.92);
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        min-width: 750px;
+        min-height: 630px;
+    }
+
+    .blockslist {
+        height: 35%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-content: start;
+        overflow-x: scroll;
+    }
+
+    .eventblock {
+        background-color: hsla(57, 92%, 73%, 0.92);
+        width: 265px;
+        padding-left: 5px;
+        margin-top: 5px;
+        margin-right: 5px;
+        border: solid black 1px;
+    }
+
+    .eventblock > dl > dd {
+        display: -webkit-box;
+       -webkit-box-orient: vertical;
+       -webkit-line-clamp: 3;
+       overflow: hidden;
+    }
+
+    .eventblock div
+    {
+        text-align: right;
+    }
+
+    .eventblock div span
+    {
+        padding-right: 5px;
+        display: block;
+        font-size: small;
+        overflow-x: hidden;
+        text-overflow: clip;
+        white-space: nowrap;
+    }
+</style>
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
+
+<div id="Main">
+    <div id="MainWrapper">
+        <h2>@Model.Localization.Upcoming</h2>
+        <div id="upComingBlocks" class="blockslist">
+            @foreach (var ev in Model.UpcomingVolonterEvents)
+            {
+                <div class="eventblock">
+                    <h4>@ev.VolonterEvent.Description.Title</h4>
+                    <dl>
+                        <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
+                        <dd>@ev.VolonterEvent.Description.TextDescription</dd>
+                    </dl>
+                    <div>
+                        <span>@Model.Localization.Location: @ev.VolonterEvent.Description.Location.TextAddress</span>
+                        <span>@Model.Localization.Date: @ev.VolonterEvent.Description.Date.ToString("dd/M/yyyy hh:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <h2>@Model.Localization.InProgress</h2>
+        <div id="inProgressBlocks" class="blockslist">
+            @foreach (var ev in Model.InProgressVolonterEvents)
+            {
+                <div class="eventblock">
+                    <h4>@ev.VolonterEvent.Description.Title</h4>
+                    <dl>
+                        <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
+                        <dd>@ev.VolonterEvent.Description.TextDescription</dd>
+                    </dl>
+                    <div>
+                        <span>@Model.Localization.Location: @ev.VolonterEvent.Description.Location.TextAddress</span>
+                        <span>@Model.Localization.Date: @ev.VolonterEvent.Description.Date.ToString("dd/M/yyyy hh:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

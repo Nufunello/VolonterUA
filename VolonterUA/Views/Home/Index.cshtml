@@ -1,5 +1,6 @@
-﻿@model VolonterUA.Models.ViewModels.IndexPage.IndexPageViewModel
+﻿@model VolonterUA.Models.ViewModels.Home.IndexPageViewModel
 @{
+    ViewBag.Title = Model.Localization.DocumentTitle;
     Layout = null;
 }
 
@@ -7,7 +8,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@Model.Localization.DocumentTitle</title>
     <style>
         html, body {
             width: 100%;
@@ -161,15 +161,15 @@
                 }
             </li>
             <li>
-                <a href="/volonter/search">@Model.Localization.VolonterEventNearBy</a>
+                <a href="/volonterevent/search">@Model.Localization.VolonterEventNearBy</a>
             </li>
             <li>
-                <a href="/volonter/orginize">@Model.Localization.OrginizeVolonterEvent</a>
+                <a href="/volonterevent/organize">@Model.Localization.OrginizeVolonterEvent</a>
             </li>
         </ul>
     </nav>
     <div id="Main">
-        <div>
+        <div id="IndexMain">
             <div id="TitleAndSloganWrapper">
                 <div id="TitleWrapper">
                     <h1 id="Title">@Model.Localization.Title</h1>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using VolonterUA.Attributes;
@@ -13,8 +14,9 @@ namespace VolonterUA.Models.Database
         Organization
     }
 
-    public class UserInfoModel
+    public class UserInfo
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 30)]
@@ -31,6 +33,7 @@ namespace VolonterUA.Models.Database
         [Required]
         [RegularExpression(@"^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$")]
         public virtual string PhoneNumber { get; set; }
+        public virtual Volonter Volonter { get; set; }
         public virtual Activity Activity { get; set; }
     }
 }
