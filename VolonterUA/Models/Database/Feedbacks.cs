@@ -18,9 +18,13 @@ namespace VolonterUA.Models.Database
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
-        public virtual string Comment { get; set; }
+        [Required]
+        public virtual FinishedVolonterEvent FinishedVolonterEvent { get; set; }
+        [Required]
+        public virtual Volonter Volonter { get; set; }
         [Required]
         [Range(1, 10)]
         public virtual int Mark { get; set; }
+        public virtual string Comment { get; set; }
     }
 }
