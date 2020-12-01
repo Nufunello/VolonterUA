@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace VolonterUA.Models.Localizations.IndexPage
+namespace VolonterUA.Models.Localizations.Home
 {
     public class IndexPageLocalizationUkraine
         : AIndexPageLocalization

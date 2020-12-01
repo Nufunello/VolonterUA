@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using VolonterUA.Models.Localizations.IndexPage;
+﻿using VolonterUA.Models.Localizations.Home;
 using VolonterUA.Models.ViewsModels;
 
-namespace VolonterUA.Models.ViewModels.IndexPage
+namespace VolonterUA.Models.ViewModels.Home
 {
     public class IndexPageViewModel
         : APageViewModel<AIndexPageLocalization>

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace VolonterUA.Models.Database
 {
-    public class Address
+    public class Location
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
         [Required]
         public virtual string TextAddress { get; set; }
@@ -15,6 +17,7 @@ namespace VolonterUA.Models.Database
 
     public class Description
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
         [Required]
         public virtual string Title { get; set; }
@@ -23,42 +26,44 @@ namespace VolonterUA.Models.Database
         [Required]
         public virtual DateTime Date { get; set; }
         [Required]
-        public virtual Address Address { get; set; }
+        public virtual Location Location { get; set; }
     }
 
     public class VolonterEvent
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
         [Required]
-        public virtual ICollection<VolonterOrganization> Organizations { get; set; }
+        public virtual VolonterOrganization VolonterOrganization { get; set; }
         [Required]
         public virtual Description Description { get; set; }
     }
 
     public class UpcomingVolonterEvent
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public virtual int Id { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
-        public virtual ICollection<Volonter> Subscribers { get; set; }
-    }
-
-    public abstract class AStartedVolonterEvent
-    {
-        public virtual int Id { get; set; }
-        [Required]
-        public virtual VolonterEvent VolonterEvent { get; set; }
-        public virtual ICollection<Volonter> VolontersAtEvent { get; set; }
+        public virtual ICollection<Volonter> Volonters { get; set; }
     }
 
     public class InProgressVolonterEvent
-        : AStartedVolonterEvent
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+        [Required]
+        public virtual VolonterEvent VolonterEvent { get; set; }
+        public virtual ICollection<Volonter> Volonters { get; set; }
     }
 
     public class FinishedVolonterEvent
-        : AStartedVolonterEvent
     {
-        public virtual ICollection<EventFeedback> VolontersFeedbacks { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+        [Required]
+        public virtual VolonterEvent VolonterEvent { get; set; }
+        public virtual ICollection<Volonter> Volonters { get; set; }
+        public virtual ICollection<EventFeedback> EventFeedbacks { get; set; }
     }
 }
