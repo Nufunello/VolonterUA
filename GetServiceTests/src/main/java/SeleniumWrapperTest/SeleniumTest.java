@@ -4,10 +4,13 @@ import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
+
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -44,7 +47,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Хочу допомогти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("firstName")).sendKeys("Andy");
         $(By.id("lastName")).sendKeys("Shynkariuk");
@@ -61,7 +64,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         String expectUrl = "https://localhost:44388/Home/Index";
@@ -74,7 +77,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1@");
         $(By.id("loginButton")).click();
         String expectUrl = "https://localhost:44388/Home/Index";
@@ -87,7 +90,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.linkText("Розлогінитись")).click();
@@ -101,7 +104,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.id("RegisterVoloterButton")).click();
@@ -249,7 +252,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.linkText("Волонтерський захід поруч")).click();
@@ -267,7 +270,7 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.linkText("Волонтерський захід поруч")).click();
@@ -281,11 +284,11 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.linkText("Про нас")).click();
-  ..      String expectUrl = "https://localhost:44388/volonterevent/search";
+        String expectUrl = "https://localhost:44388/info/aboutUs";
         String currenUrl = WebDriverRunner.url();
         Assert.assertEquals(currenUrl,expectUrl);
         Thread.sleep(15000);
@@ -295,15 +298,15 @@ public class SeleniumTest {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriyShunkariuk");
+        $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
         $(By.linkText("Організувати волонтерство")).click();
-    ..    String expectUrl = "https://localhost:44388/volonterevent/search";
+        String expectUrl = "https://localhost:44388/volonterevent/organize";
         String currenUrl = WebDriverRunner.url();
         Assert.assertEquals(currenUrl,expectUrl);
         Thread.sleep(15000);
     }
-    
+
 
 }
