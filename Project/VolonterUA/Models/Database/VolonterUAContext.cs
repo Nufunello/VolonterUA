@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace VolonterUA.Models.Database
@@ -138,11 +139,11 @@ namespace VolonterUA.Models.Database
         {
             System.Data.Entity.Database.SetInitializer(new VolonterUAContextInitializer());
         }
+
         public VolonterUAContext()
             : base("name=VolonterUAContext")
         {
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
