@@ -9,11 +9,13 @@ namespace VolonterUA.Models.Database
 {
     public class VolonterOrganization
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [ForeignKey("Organizator")]
         public virtual int Id { get; set; }
+        public virtual Organizator Organizator { get; set; }
         [Required]
-        public virtual UserInfo Representative { get; set; }
-        [Required]
+        [StringLength(maximumLength: 30)]
+        [RegularExpression(@"(^\s*([a-zA-Z ]+([-a-zA-Z][a-zA-Z])|([a-zA-Z ]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ ])*\s*$)")]
         public virtual string Name { get; set; }
         public virtual ICollection<VolonterOrganizationFeedback> VolonterOrganizationFeedbacks { get; set; }
         public virtual ICollection<UpcomingVolonterEvent> UpcomingVolonterEvents { get; set; }

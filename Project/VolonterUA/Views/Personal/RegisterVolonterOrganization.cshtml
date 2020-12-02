@@ -1,0 +1,29 @@
+﻿@model VolonterUA.Models.ViewModels.Personal.RegisterVolonterOrganizationPageViewModel
+
+@{
+    ViewBag.Title = Model.Localization.DocumentTitle;
+    Layout = "~/Views/Personal/_Layout.cshtml";
+}
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
+
+<div id="Main">
+    @using (@Html.BeginForm())
+    {
+        <div>
+            <div>
+                @Html.LabelFor(model => model.ValidationModel.VolonterOrganization.Name, Model.Localization.NameLabel, new { @class = "label" })
+                @Html.EditorFor(model => model.ValidationModel.VolonterOrganization.Name, new { htmlAttributes = new { id = "name" } })
+                @Html.ValidationMessageFor(model => model.ValidationModel.VolonterOrganization.Name, Model.Localization.NameErrorMessage)
+            </div>
+
+            <div>
+                <input type="submit" id="loginButton" value="@Model.Localization.ToRegister" />
+            </div>
+        </div>
+    }
+</div>

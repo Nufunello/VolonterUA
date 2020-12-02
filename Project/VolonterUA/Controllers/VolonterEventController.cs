@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using VolonterUA.Models.Database;
 using VolonterUA.Models.Localizations.Home;
 using VolonterUA.Models.ViewModels.Home;
+using VolonterUA.Models.ViewValidationModels.Home;
 
 namespace VolonterUA.Controllers
 {
@@ -30,6 +31,30 @@ namespace VolonterUA.Controllers
                 );
                 view.ExecuteResult(ControllerContext);
                 return View("~/Views/Empty.cshtml");
+            }
+        }
+        public ActionResult Organize()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return View("~/Views/Home/OrganizeEvent.cshtml", new RegisterEventPageViewModel(new RegisterEventPageLocalizationUkraine()));
+            }
+            else
+            {
+                return Redirect("/Home/Index");
+            }
+        }
+        [HttpPost]
+        public ActionResult Organize([Microsoft.AspNetCore.Mvc.FromForm] RegisterEventPageViewModel model)
+        {
+            using (var context = new VolonterUAContext())
+            {
+                var organizator = context.UserLoginDatas.First(x => x.Login == User.Identity.Name).UserInfo.Organizator;
+                var volonterEvent = model.ValidationModel.VolonterEvent;
+                volonterEvent.VolonterOrganization = organizator.VolonterOrganization;
+                context.PostEvent(volonterEvent);
+                context.SaveChanges();
+                return Redirect("/volonterevent/search");
             }
         }
         public ActionResult Index()

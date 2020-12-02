@@ -5,12 +5,11 @@ using System.Linq;
 using System.Web;
 using VolonterUA.Models.Database;
 
-namespace VolonterUA.Models.ViewValidationModels.Personal
+namespace VolonterUA.Models.ViewValidationModels.Home
 {
-    public class RegisterVolonterViewValidationModel
-        : AViewValidationModel
+    public class RegisterEventViewValidationModel
     {
         [Required]
-        public UserLoginData UserLoginData { get; set; }
+        public VolonterEvent VolonterEvent { get; set; }
     }
 }
