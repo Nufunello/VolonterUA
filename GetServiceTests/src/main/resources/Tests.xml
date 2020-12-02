@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Selenium wrapper test" verbose="1" >
+    <test name="testNavigation">
+        <packages>
+            <package name="SeleniumWrapperTest" />
+        </packages>
+    </test>
+    <test name="test_1">
+        <packages>
+            <package name="SeleniumWrapperTest" />
+        </packages>
+    </test>
+</suite>
