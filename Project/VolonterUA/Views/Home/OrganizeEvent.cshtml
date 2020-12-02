@@ -1,0 +1,49 @@
+﻿
+@model VolonterUA.Models.ViewModels.Home.RegisterEventPageViewModel
+
+@{
+    ViewBag.Title = Model.Localization.DocumentTitle;
+    Layout = "~/Views/Personal/_Layout.cshtml";
+}
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
+
+<div id="Main">
+    @using (@Html.BeginForm())
+    {
+    <div>
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.VolonterEvent.Description.Title, Model.Localization.TitleLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.VolonterEvent.Description.Title, new { htmlAttributes = new { id = "title" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.VolonterEvent.Description.Title, Model.Localization.ErrorMessage)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.VolonterEvent.Description.TextDescription, Model.Localization.TextDescriptionLabel, new { @class = "label" })
+            @Html.TextAreaFor(model => model.ValidationModel.VolonterEvent.Description.TextDescription, new { @class = "inp" })
+            @Html.ValidationMessageFor(model => model.ValidationModel.VolonterEvent.Description.TextDescription, Model.Localization.ErrorMessage)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.VolonterEvent.Description.Date, Model.Localization.DateLabel, new { @class = "label" })
+            @Html.TextBoxFor(model => model.ValidationModel.VolonterEvent.Description.Date, new { type = "datetime-local" })
+            @Html.ValidationMessageFor(model => model.ValidationModel.VolonterEvent.Description.Date, Model.Localization.ErrorMessage)
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.ValidationModel.VolonterEvent.Description.Location.TextAddress, Model.Localization.TextAddressLabel, new { @class = "label" })
+            @Html.EditorFor(model => model.ValidationModel.VolonterEvent.Description.Location.TextAddress, new { htmlAttributes = new { id = "textAddress" } })
+            @Html.ValidationMessageFor(model => model.ValidationModel.VolonterEvent.Description.Location.TextAddress, Model.Localization.ErrorMessage)
+        </div>
+
+
+        <div>
+            <input type="submit" id="registerButton" value="@Model.Localization.ToRegister" />
+        </div>
+    </div>
+    }
+</div>

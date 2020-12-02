@@ -17,7 +17,7 @@
         <div>
             <div>
                 @Html.LabelFor(model => model.ValidationModel.VolonterOrganization.Name, Model.Localization.NameLabel, new { @class = "label" })
-                @Html.EditorFor(model => model.ValidationModel.VolonterOrganization.Name, new { htmlAttributes = new { id = "login" } })
+                @Html.EditorFor(model => model.ValidationModel.VolonterOrganization.Name, new { htmlAttributes = new { id = "name" } })
                 @Html.ValidationMessageFor(model => model.ValidationModel.VolonterOrganization.Name, Model.Localization.NameErrorMessage)
             </div>
 
