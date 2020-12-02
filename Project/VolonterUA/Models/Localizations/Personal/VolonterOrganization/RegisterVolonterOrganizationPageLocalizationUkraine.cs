@@ -10,7 +10,7 @@ namespace VolonterUA.Models.Localizations.Personal.VolonterOrganization
     {
         public override string NameLabel => "Ім'я організації";
 
-        public override string NameErrorMessage => "Ім'я може бути до 30 символів(тільки латинськими або тільки українськи буквами), у випадку якщо у вас подвійне введіть через дефіс \"-\"";
+        public override string NameErrorMessage => "Ім'я може бути до 30 символів(тільки латинськими або тільки українськи буквами) може містити пробіли та дефіси";
         
         public override string ToRegister => "Зареєструвати організацію";
 
