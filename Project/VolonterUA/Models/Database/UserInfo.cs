@@ -34,6 +34,7 @@ namespace VolonterUA.Models.Database
         [RegularExpression(@"^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$")]
         public virtual string PhoneNumber { get; set; }
         public virtual Volonter Volonter { get; set; }
+        public virtual Organizator Organizator { get; set; }
         public virtual Activity Activity { get; set; }
     }
 }

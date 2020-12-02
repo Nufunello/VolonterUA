@@ -18,7 +18,6 @@ namespace VolonterUA.Models.ViewModels.Personal
             : base(localization)
         {
         }
-
         public LoginVolonterViewValidationModel ValidationModel { get; set; }
     }
 }

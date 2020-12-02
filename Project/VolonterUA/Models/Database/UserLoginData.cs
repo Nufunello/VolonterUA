@@ -8,9 +8,10 @@ using System.Web;
 
 namespace VolonterUA.Models.Database
 {
-    public class UserLoginDataModel
+    public class UserLoginData
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        [ForeignKey("UserInfo")]
         public virtual int Id { get; set; }
         [Required]
         public virtual UserInfo UserInfo { get; set; }

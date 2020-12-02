@@ -78,22 +78,10 @@ namespace VolonterUA.Controllers
             {
                 using (var context = new VolonterUAContext())
                 {
-                    var userManager = context.UserManager;
-                    var loginData = model.ValidationModel.UserLoginData;
-                    var user = new IdentityUser
+                    var redirect = context.RegisterUser(model.ValidationModel.UserLoginData, Request, HttpContext);
+                    if (redirect != "")
                     {
-                        UserName = loginData.Login,
-                        PasswordHash = loginData.Password
-                    };
-                    var result = await userManager.CreateAsync(user);
-                    if (result.Succeeded)
-                    {
-                        var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
-                        await signInManager.SignInAsync(user, false, false);
-                        context.UserLoginDatas.Add(loginData);
-                        context.Volonters.Add(new Volonter { UserInfo = loginData.UserInfo });
-                        context.SaveChanges();
-                        return Redirect("/VolonterEvent/Search");
+                        return Redirect(redirect);
                     }
                 }
                 return Json(new { status = "Error" });
