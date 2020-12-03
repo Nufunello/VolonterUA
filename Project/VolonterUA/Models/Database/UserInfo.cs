@@ -20,18 +20,18 @@ namespace VolonterUA.Models.Database
         public virtual int Id { get; set; }
         [Required]
         [StringLength(maximumLength: 30)]
-        [RegularExpression(@"(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)")]
+        [RegularExpression(@"(^([a-zA-Z]+(['-a-zA-Z][a-zA-Z])|([a-zA-Z]))*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-'А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*$)")]
         public virtual string FirstName { get; set; }
         [Required]
         [StringLength(maximumLength: 30)]
-        [RegularExpression(@"(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)")]
+        [RegularExpression(@"(^([a-zA-Z]+(['-a-zA-Z][a-zA-Z])|([a-zA-Z]))*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-'А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*$)")]
         public virtual string LastName { get; set; }
         [Required]
         [AdultHood]
         [DataType(DataType.Date)]
         public virtual DateTime Birthdate { get; set; }
         [Required]
-        [RegularExpression(@"^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$")]
+        [RegularExpression(@"^\+?(38)?(0(67|50|68|96|97|98|66|95|99)\d{7})$")]
         public virtual string PhoneNumber { get; set; }
         public virtual Volonter Volonter { get; set; }
         public virtual Organizator Organizator { get; set; }
