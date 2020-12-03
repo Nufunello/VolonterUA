@@ -58,11 +58,26 @@ namespace VolonterUA.Controllers
                 return View("~/Views/Empty.cshtml");
             }
         }
+        public bool hasOrganization(VolonterUAContext context)
+        {
+            var userInfo = context.UserLoginDatas.First(x => x.Login == User.Identity.Name).UserInfo;
+            return userInfo.Organizator != null;
+        }
         public ActionResult Organize()
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View("~/Views/Home/OrganizeEvent.cshtml", new RegisterEventPageViewModel(new RegisterEventPageLocalizationUkraine()));
+                using (var context = new VolonterUAContext())
+                {
+                    if (hasOrganization(context))
+                    {
+                        return View("~/Views/Home/OrganizeEvent.cshtml", new RegisterEventPageViewModel(new RegisterEventPageLocalizationUkraine()));
+                    }
+                    else
+                    {
+                        return Redirect("/personal/volonterOrganization/register");
+                    }
+                }
             }
             else
             {
