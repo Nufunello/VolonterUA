@@ -1,10 +1,13 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
+using System.Web;
 
 namespace VolonterUA.Models.Database
 {
@@ -13,7 +16,7 @@ namespace VolonterUA.Models.Database
         #region DbSets
 
         public virtual DbSet<UserInfo> UserInfos { get; set; }
-        public virtual DbSet<UserLoginDataModel> UserLoginDatas { get; set; }
+        public virtual DbSet<UserLoginData> UserLoginDatas { get; set; }
         public virtual DbSet<Volonter> Volonters { get; set; }
         public virtual DbSet<VolonterOrganization> VolonterOrganizations { get; set; }
 
@@ -32,7 +35,7 @@ namespace VolonterUA.Models.Database
 
         #region UserMethods
         
-        public Volonter AddVolonter(UserLoginDataModel userLoginData)
+        public Volonter AddVolonter(UserLoginData userLoginData)
         {
             UserManager.Create(new IdentityUser
             {
@@ -66,7 +69,7 @@ namespace VolonterUA.Models.Database
             var inProgressVolonterEvent = new InProgressVolonterEvent
             {
                 VolonterEvent = upcomingVolonterEvent.VolonterEvent,
-                Volonters = new List<Volonter> { }
+                Volonters = upcomingVolonterEvent.Volonters == null ? new List<Volonter>() : upcomingVolonterEvent.Volonters.ToList()
             };
             InProgressVolonterEvents.Add(inProgressVolonterEvent);
             UpcomingVolonterEvents.Remove(upcomingVolonterEvent);
@@ -76,16 +79,11 @@ namespace VolonterUA.Models.Database
 
         public FinishedVolonterEvent FinishEvent(InProgressVolonterEvent inProgressVolonterEvent)
         {
-            var volonters = inProgressVolonterEvent.Volonters;
             var finishedVolonterEvent = new FinishedVolonterEvent
             {
                 VolonterEvent = inProgressVolonterEvent.VolonterEvent,
-                Volonters = new List<Volonter> { }
+                Volonters = inProgressVolonterEvent.Volonters == null ? new List<Volonter> { } : inProgressVolonterEvent.Volonters.ToList()
             };
-            foreach (var volonter in volonters)
-            {
-                finishedVolonterEvent.Volonters.Add(volonter);
-            }
             InProgressVolonterEvents.Remove(inProgressVolonterEvent);
 
             foreach (var volonter in finishedVolonterEvent.Volonters)
@@ -100,17 +98,47 @@ namespace VolonterUA.Models.Database
 
         #endregion
 
+        public string RegisterUser(UserLoginData loginData, HttpRequestBase Request, HttpContextBase HttpContext)
+        {
+            var userManager = UserManager;
+            var user = new IdentityUser
+            {
+                UserName = loginData.Login,
+                PasswordHash = loginData.Password
+            };
+            var result = userManager.Create(user);
+            if (result.Succeeded)
+            {
+                var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
+                signInManager.SignIn(user, false, false);
+                UserLoginDatas.Add(loginData);
+                Volonters.Add(new Volonter { UserInfo = loginData.UserInfo });
+                SaveChanges();
+
+                var prevUrl = Request.UrlReferrer;
+                if (prevUrl != null && prevUrl.LocalPath.ToLower() == "/personal/volonterorganization/register")
+                {
+                    return "/personal/volonterorganization/register";
+                }
+                else
+                {
+                    return "/VolonterEvent/Search";
+                }
+            }
+            return "";
+        }
+
         private UserStore<IdentityUser> UserStore => new UserStore<IdentityUser>(this);
         public UserManager<IdentityUser> UserManager => new UserManager<IdentityUser>(UserStore);
         static VolonterUAContext()
         {
             System.Data.Entity.Database.SetInitializer(new VolonterUAContextInitializer());
         }
+
         public VolonterUAContext()
             : base("name=VolonterUAContext")
         {
         }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

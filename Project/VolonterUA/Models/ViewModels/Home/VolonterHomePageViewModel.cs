@@ -8,15 +8,15 @@ namespace VolonterUA.Models.ViewModels.Home
     public class VolonterHomePageViewModel
         : APageViewModel<AVolonterHomePageLocalization>
     {
-        public VolonterHomePageViewModel(AVolonterHomePageLocalization localization, IEnumerable<UpcomingVolonterEvent> upcomingVolonterEvents, IEnumerable<InProgressVolonterEvent> inProgressVolonterEvents, string fullname)
+        public VolonterHomePageViewModel(AVolonterHomePageLocalization localization, IEnumerable<UpcomingVolonterEvent> upcomingVolonterEvents, IEnumerable<InProgressVolonterEvent> inProgressVolonterEvents, UserInfo userInfo)
             : base(localization)
         {
             UpcomingVolonterEvents = upcomingVolonterEvents;
             InProgressVolonterEvents = inProgressVolonterEvents;
-            FullName = fullname;
+            UserInfo = userInfo;
         }
         public IEnumerable<UpcomingVolonterEvent> UpcomingVolonterEvents { get; }
         public IEnumerable<InProgressVolonterEvent> InProgressVolonterEvents { get; }
-        public string FullName { get; }
+        public UserInfo UserInfo{ get; }
     }
 }

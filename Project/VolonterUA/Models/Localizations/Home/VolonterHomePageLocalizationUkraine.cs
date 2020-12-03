@@ -12,10 +12,10 @@ namespace VolonterUA.Models.Localizations.Home
 
         public override string Location => "Локація";
 
+        public override string Date => "Дата";
+
         public override string Upcoming => "Заплановані";
 
         public override string InProgress => "Зараз відбуваються";
-
-        public override string Date => "Дата";
     }
 }

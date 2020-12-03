@@ -12,7 +12,7 @@ namespace VolonterUA.Models.Database
         {
             return new List<Volonter>
             {
-                context.AddVolonter(new UserLoginDataModel
+                context.AddVolonter(new UserLoginData
                 {
                     Login = "iivanovich",
                     Password = "Qwerty123!",
@@ -24,7 +24,7 @@ namespace VolonterUA.Models.Database
                         PhoneNumber = "+380995123380"
                     }
                 }),
-                context.AddVolonter(new UserLoginDataModel
+                context.AddVolonter(new UserLoginData
                 {
                     Login = "pro_volonter",
                     Password = "Karma33!",
@@ -36,7 +36,7 @@ namespace VolonterUA.Models.Database
                         PhoneNumber = "+380995123381"
                     }
                 }),
-                context.AddVolonter(new UserLoginDataModel
+                context.AddVolonter(new UserLoginData
                 {
                     Login = "che_volonter",
                     Password = "CheBest1!",
@@ -48,7 +48,7 @@ namespace VolonterUA.Models.Database
                         PhoneNumber = "+380995123382"
                     }
                 }),
-                context.AddVolonter(new UserLoginDataModel
+                context.AddVolonter(new UserLoginData
                 {
                     Login = "burger12",
                     Password = "Ozzy1aa!",
@@ -60,7 +60,7 @@ namespace VolonterUA.Models.Database
                         PhoneNumber = "+380995123383"
                     }
                 }),
-                context.AddVolonter(new UserLoginDataModel
+                context.AddVolonter(new UserLoginData
                 {
                     Login = "admin123",
                     Password = "Admin123!",
@@ -77,7 +77,7 @@ namespace VolonterUA.Models.Database
 
         private List<VolonterOrganization> AddOrganizations(VolonterUAContext context)
         {
-            var organizator1 = context.AddVolonter(new UserLoginDataModel
+            var organizator1 = context.AddVolonter(new UserLoginData
             {
                 Login = "organizator1",
                 Password = "Qwerty123!",
@@ -89,8 +89,15 @@ namespace VolonterUA.Models.Database
                     PhoneNumber = "+380995123388"
                 }
             });
+            organizator1.UserInfo.Organizator = new Organizator
+            {
+                VolonterOrganization = new VolonterOrganization
+                {
+                    Name = "Про Волонтерський Рух"
+                }
+            };
 
-            var organizator2 = context.AddVolonter(new UserLoginDataModel
+            var organizator2 = context.AddVolonter(new UserLoginData
             {
                 Login = "karma_ambassador",
                 Password = "Karma33!",
@@ -102,24 +109,16 @@ namespace VolonterUA.Models.Database
                     PhoneNumber = "+380995123389"
                 }
             });
-
-            var list = new List<VolonterOrganization>
+            organizator2.UserInfo.Organizator = new Organizator
             {
-                new VolonterOrganization
+                VolonterOrganization = new VolonterOrganization
                 {
-                    Name = "Про Волонтерський Рух",
-                    Representative = organizator1.UserInfo
-                },
-                new VolonterOrganization
-                {
-                    Name = "Волонтери України",
-                    Representative = organizator2.UserInfo
+                    Name = "Волонтери України"
                 }
             };
-            context.VolonterOrganizations.AddRange(list);
             context.SaveChanges();
 
-            return list;
+            return context.VolonterOrganizations.ToList();
         }
 
         private UpcomingVolonterEvent AddUpcomingEvent(VolonterUAContext context, VolonterOrganization organizator, Description description)
@@ -230,7 +229,7 @@ namespace VolonterUA.Models.Database
             {
                 Title = "Права усім",
                 Date = DateTime.Now,
-                TextDescription = "Чи замислювались ви наскільки добре знають свої права ваші співвітчизнки? " +
+                TextDescription = "Чи замислювались ви наскільки добре знають свої права ваші співвітчизники? " +
                 "Чи хотіли би ви допомогти людям краще розуміти свої права та обов'язки? Якщо так і ви маєте освіту в юриспруденції " +
                 "або навчаєтесь але маєте що розповісти, то ми запрошуємо вас бути докладачами на онлайн-конференції",
                 Location = new Location { TextAddress = "zoom.com/id123" }
