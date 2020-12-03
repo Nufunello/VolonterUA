@@ -36,14 +36,21 @@ namespace VolonterUA.Controllers
                 {
                     var userManager = context.UserManager;
                     var user = userManager.FindByName(model.ValidationModel.Login);
+                    if (user == null)
+                    {
+                        return Json(new { status = "User is not registered" });
+                    }
                     if (user.PasswordHash == model.ValidationModel.Password)
                     {
                         var signInManager = new SignInManager<IdentityUser, string>(userManager, HttpContext.GetOwinContext().Authentication);
                         await signInManager.SignInAsync(user, false, false);
                         return Redirect(AuthenticatedRedirect);
                     }
+                    else
+                    {
+                        return Json(new { status = "Invalid password" });
+                    }
                 }
-                return Json(new { status = "Invalid credentials" });
             }
             else
             {
