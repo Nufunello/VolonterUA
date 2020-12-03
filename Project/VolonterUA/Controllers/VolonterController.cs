@@ -67,7 +67,7 @@ namespace VolonterUA.Controllers
         }
 
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult> Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
+        public ActionResult Register([Microsoft.AspNetCore.Mvc.FromForm] RegisterVolonterPageViewModel model)
         {
             if (User.Identity.IsAuthenticated)
             {

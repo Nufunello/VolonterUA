@@ -69,7 +69,7 @@ namespace VolonterUA.Models.Database
             var inProgressVolonterEvent = new InProgressVolonterEvent
             {
                 VolonterEvent = upcomingVolonterEvent.VolonterEvent,
-                Volonters = new List<Volonter> { }
+                Volonters = upcomingVolonterEvent.Volonters == null ? new List<Volonter>() : upcomingVolonterEvent.Volonters.ToList()
             };
             InProgressVolonterEvents.Add(inProgressVolonterEvent);
             UpcomingVolonterEvents.Remove(upcomingVolonterEvent);
@@ -79,16 +79,11 @@ namespace VolonterUA.Models.Database
 
         public FinishedVolonterEvent FinishEvent(InProgressVolonterEvent inProgressVolonterEvent)
         {
-            var volonters = inProgressVolonterEvent.Volonters;
             var finishedVolonterEvent = new FinishedVolonterEvent
             {
                 VolonterEvent = inProgressVolonterEvent.VolonterEvent,
-                Volonters = new List<Volonter> { }
+                Volonters = inProgressVolonterEvent.Volonters == null ? new List<Volonter> { } : inProgressVolonterEvent.Volonters.ToList()
             };
-            foreach (var volonter in volonters)
-            {
-                finishedVolonterEvent.Volonters.Add(volonter);
-            }
             InProgressVolonterEvents.Remove(inProgressVolonterEvent);
 
             foreach (var volonter in finishedVolonterEvent.Volonters)

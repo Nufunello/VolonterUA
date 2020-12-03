@@ -1,0 +1,108 @@
+﻿@model VolonterUA.Models.ViewModels.Personal.VolonterPersonalPageViewModel
+
+@{
+    ViewBag.Title = Model.Localization.DocumentTitle;
+    Layout = "./_Layout.cshtml";
+}
+
+<style>
+    #Main {
+        flex-direction: column;
+    }
+
+    #MainWrapper {
+        width: 50%;
+    }
+
+    #info {
+        display: flex;
+        justify-content: flex-start;
+        height: 50%;
+    }
+
+    .infoblock {
+        padding-left: 5px;
+        border: 1px solid black;
+        width: 49%;
+    }
+</style>
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
+
+<div id="Main">
+    <div id="MainWrapper">
+        <div id="info">
+            <div class="infoblock">
+                <h3>Загальна інформація</h3>
+                <p>@Model.Localization.FirstName: @Model.UserInfo.FirstName</p>
+                <p>@Model.Localization.LastName: @Model.UserInfo.LastName</p>
+                <p>@Model.Localization.PhoneNumber: @Model.UserInfo.PhoneNumber</p>
+                <p>@Model.Localization.Years: @((int)((DateTime.Now - Model.UserInfo.Birthdate).TotalDays / 365))</p>
+            </div>
+            <div class="infoblock">
+                <h3>Діяльність користувача</h3>
+                @if (Model.UserInfo.Organizator != null)
+                {
+                    <div>
+                        <p>@Model.Localization.RepresentativeOf: <q>@Model.UserInfo.Organizator.VolonterOrganization.Name</q></p>
+                        <p>@Model.Localization.OrganizedCount(Model.UserInfo.Organizator.VolonterOrganization.FinishedVolonterEvents.Count)</p>
+                    </div>
+                }
+                <div>
+                    <p>@Model.Localization.Volontered(@Model.UserInfo.Volonter.FinishedVolonterEvents.Count)</p>
+                    <p>@Model.Localization.Karma: @Model.UserInfo.Volonter.Karma</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>@Model.Localization.Subscribes</h2>
+        <div id="subscribes" class="blockslist">
+            @if (Model.UserInfo.Volonter.UpcomingVolonterEvents.Count() == 0)
+            {
+                <p>Ви не підписанні ні на які волонтерські заходи</p>
+            }
+            @foreach (var ev in Model.UserInfo.Volonter.UpcomingVolonterEvents)
+            {
+                <div class="eventblock">
+                    <div class="eventblocktitle">
+                        <h4>@ev.VolonterEvent.Description.Title</h4>
+                        <span class="fa fa-star@((Model.UserInfo.Volonter.UpcomingVolonterEvents.Contains(ev)) ? " checked" : "")" id="@ev.VolonterEventId"></span>
+                    </div>
+                    <dl>
+                        <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
+                        <dd>@ev.VolonterEvent.Description.TextDescription</dd>
+                    </dl>
+                    <div>
+                        <span>@Model.Localization.Location: @ev.VolonterEvent.Description.Location.TextAddress</span>
+                        <span>@Model.Localization.Date: @ev.VolonterEvent.Description.Date.ToString("dd/M/yyyy hh:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    var subscribebuttons = document.getElementsByClassName("fa-star");
+    for (let button of subscribebuttons) {
+        button.onclick = function () {
+            var eventId = button.getAttribute("id");
+            var xhr = new XMLHttpRequest();
+            var classs = button.getAttribute("class");
+            var isChecked = classs.includes("checked");
+            var method = isChecked ? 'DELETE' : 'POST';
+            xhr.open(method, '/volonterevent/updatesubscribes/?id=' + eventId, false);
+            xhr.send();
+            if (isChecked) {
+                button.setAttribute("class", classs.replace('checked', ''))
+            }
+            else {
+                button.classList.add('checked');
+            }
+        }
+    }
+</script>

@@ -41,8 +41,9 @@ namespace VolonterUA.Models.Database
 
     public class UpcomingVolonterEvent
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        [Key]
+        [ForeignKey("VolonterEvent")]
+        public virtual int VolonterEventId { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
         public virtual ICollection<Volonter> Volonters { get; set; }
@@ -50,8 +51,9 @@ namespace VolonterUA.Models.Database
 
     public class InProgressVolonterEvent
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        [Key]
+        [ForeignKey("VolonterEvent")]
+        public virtual int VolonterEventId { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
         public virtual ICollection<Volonter> Volonters { get; set; }
@@ -59,8 +61,9 @@ namespace VolonterUA.Models.Database
 
     public class FinishedVolonterEvent
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public virtual int Id { get; set; }
+        [Key]
+        [ForeignKey("VolonterEvent")]
+        public virtual int VolonterEventId { get; set; }
         [Required]
         public virtual VolonterEvent VolonterEvent { get; set; }
         public virtual ICollection<Volonter> Volonters { get; set; }

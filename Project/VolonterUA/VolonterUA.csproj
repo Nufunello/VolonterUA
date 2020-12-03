@@ -366,6 +366,7 @@
     <Compile Include="Controllers\VolonterController.cs" />
     <Compile Include="Controllers\VolonterEventController.cs" />
     <Compile Include="Controllers\VolonterOrganizationController.cs" />
+    <Compile Include="Controllers\VolonterPersonalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -389,8 +390,10 @@
     <Compile Include="Models\Localizations\Personal\VolonterOrganization\RegisterVolonterOrganizationPageLocalizationUkraine.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\ALoginVolonterPageLocalization.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\ARegisterVolonterPageLocalization.cs" />
+    <Compile Include="Models\Localizations\Personal\Volonter\AVolonterPersonalPageLocalization.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\LoginVolonterPageLocalizationUkraine.cs" />
     <Compile Include="Models\Localizations\Personal\Volonter\RegisterVolonterPageLocalizationUkraine.cs" />
+    <Compile Include="Models\Localizations\Personal\Volonter\VolonterPersonalPageLocalizationUkraine.cs" />
     <Compile Include="Models\ViewModels\APageViewModel.cs" />
     <Compile Include="Models\ViewModels\Home\IndexPageViewModel.cs" />
     <Compile Include="Models\ViewModels\Home\RegisterEventPageViewModel.cs" />
@@ -398,6 +401,7 @@
     <Compile Include="Models\ViewModels\Personal\LoginVolonterPageViewModel.cs" />
     <Compile Include="Models\ViewModels\Personal\RegisterVolonterOrganizationPageViewModel.cs" />
     <Compile Include="Models\ViewModels\Personal\RegisterVolonterPageViewModel.cs" />
+    <Compile Include="Models\ViewModels\Personal\VolonterPersonalPageViewModel.cs" />
     <Compile Include="Models\ViewValidationModels\AViewValidationModel.cs" />
     <Compile Include="Models\ViewValidationModels\Home\RegisterEventViewValidationModel.cs" />
     <Compile Include="Models\ViewValidationModels\Personal\LoginVolonterViewValidationModel.cs" />
@@ -466,12 +470,14 @@
     <Content Include="Views\Empty.cshtml" />
     <Content Include="Views\Personal\RegisterVolonterOrganization.cshtml" />
     <Content Include="Views\Home\OrganizeEvent.cshtml" />
+    <Content Include="Views\Personal\VolonterPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\VolonterEvent\" />
     <Folder Include="Views\VolonterOrganization\" />
+    <Folder Include="Views\VolonterPersonal\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,70 +5,14 @@
     Layout = "~/Views/Personal/_Layout.cshtml";
 }
 
-<style>
-    #MainWrapper {
-        height: 90%;
-        width: 90%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        background-color: hsla(57, 92%, 86%, 0.92);
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        min-width: 750px;
-        min-height: 630px;
-    }
-
-    .blockslist {
-        height: 35%;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-content: start;
-        overflow-x: scroll;
-    }
-
-    .eventblock {
-        background-color: hsla(57, 92%, 73%, 0.92);
-        width: 265px;
-        padding-left: 5px;
-        margin-top: 5px;
-        margin-right: 5px;
-        border: solid black 1px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .eventblock > dl > dd {
-        display: -webkit-box;
-       -webkit-box-orient: vertical;
-       -webkit-line-clamp: 3;
-       overflow: hidden;
-    }
-
-    .eventblock div
-    {
-        text-align: right;
-    }
-
-    .eventblock div span
-    {
-        padding-right: 5px;
-        display: block;
-        font-size: small;
-        overflow-x: hidden;
-        text-overflow: clip;
-        white-space: nowrap;
-    }
-</style>
-
 <nav id="Header">
     <div id="logoHref">
         <a href="/Home/Index"></a>
     </div>
-    <p>@Model.FullName</p>
+    @if (Model.UserInfo != null)
+    {
+        <p>@Model.UserInfo.FirstName @Model.UserInfo.LastName</p>
+    }
 </nav>
 
 <div id="Main">
@@ -78,7 +22,13 @@
             @foreach (var ev in Model.UpcomingVolonterEvents)
             {
                 <div class="eventblock">
-                    <h4>@ev.VolonterEvent.Description.Title</h4>
+                    <div class="eventblocktitle">
+                        <h4>@ev.VolonterEvent.Description.Title</h4>
+                        @if (Model.UserInfo != null)
+                        {
+                            <span class="fa fa-star@((Model.UserInfo.Volonter.UpcomingVolonterEvents.Contains(ev)) ? " checked" : "")" id="@ev.VolonterEventId"></span>
+                        }
+                    </div>
                     <dl>
                         <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
                         <dd>@ev.VolonterEvent.Description.TextDescription</dd>
@@ -109,3 +59,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    var subscribebuttons = document.getElementsByClassName("fa-star");
+    for (let button of subscribebuttons) {
+        button.onclick = function () {
+            var eventId = button.getAttribute("id");
+            var xhr = new XMLHttpRequest();
+            var classs = button.getAttribute("class");
+            var isChecked = classs.includes("checked");
+            var method = isChecked ? 'DELETE' : 'POST';
+            xhr.open(method, '/volonterevent/updatesubscribes/?id=' + eventId, false);
+            xhr.send();
+            if (isChecked) {
+                button.setAttribute("class", classs.replace('checked', ''))
+            }
+            else {
+                button.classList.add('checked');
+            }
+        }
+    }
+</script>

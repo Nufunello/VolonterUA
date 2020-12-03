@@ -17,7 +17,7 @@ namespace VolonterUA.Models.Localizations.Home
         public override string VolonterEventNearBy => "Волонтерський захід поруч";
         public override string SignIn => "Увійти";
         public override string OrginizeVolonterEvent => "Організувати волонтерство";
-
         public override string SignOut => "Розлогінитись";
+        public override string Cabinet => "Особистий кабінет";
     }
 }
