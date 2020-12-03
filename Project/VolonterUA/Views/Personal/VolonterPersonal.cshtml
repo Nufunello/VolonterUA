@@ -61,6 +61,10 @@
 
         <h2>@Model.Localization.Subscribes</h2>
         <div id="subscribes" class="blockslist">
+            @if (Model.UserInfo.Volonter.UpcomingVolonterEvents.Count() == 0)
+            {
+                <p>Ви не підписанні ні на які волонтерські заходи</p>
+            }
             @foreach (var ev in Model.UserInfo.Volonter.UpcomingVolonterEvents)
             {
                 <div class="eventblock">
