@@ -18,5 +18,6 @@ namespace VolonterUA.Models.Localizations.Home
         public abstract string SignIn { get; }
         public abstract string SignOut { get; }
         public abstract string OrginizeVolonterEvent { get; }
+        public abstract string Cabinet { get; }
     }
 }

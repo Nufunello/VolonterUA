@@ -150,16 +150,21 @@
             <li>
                 <a href="/info/aboutUs">@Model.Localization.AboutUs</a>
             </li>
-            <li>
-                @if (User.Identity.IsAuthenticated)
-                {
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li>
                     <a href="/personal/volonter/signout">@Model.Localization.SignOut</a>
-                }
-                else
-                {
-                    <a href="/personal/volonter/signin">@Model.Localization.SignIn</a>
-                }
-            </li>
+                </li>
+                <li>
+                    <a href="/volonterpersonal/index">@Model.Localization.Cabinet</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                <a href="/personal/volonter/signin">@Model.Localization.SignIn</a>
+                </li>
+            }
             <li>
                 <a href="/volonterevent/search">@Model.Localization.VolonterEventNearBy</a>
             </li>
