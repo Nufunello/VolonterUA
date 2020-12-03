@@ -3,6 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
     <style type="text/css">
         .field-validation-valid {
             display: none;
@@ -138,11 +144,16 @@
             justify-content: space-between;
         }
 
+        .eventblocktitle h4,span
+        {
+            display: inline-block;
+        }
+
         .eventblock > dl > dd {
             display: -webkit-box;
-           -webkit-box-orient: vertical;
-           -webkit-line-clamp: 3;
-           overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
         }
 
         .eventblock div

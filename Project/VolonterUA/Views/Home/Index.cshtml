@@ -147,22 +147,19 @@
             <a href="/Home/Index"></a>
         </div>
         <ul>
-            <li>
-                <a href="/info/aboutUs">@Model.Localization.AboutUs</a>
-            </li>
             @if (User.Identity.IsAuthenticated)
             {
                 <li>
-                    <a href="/personal/volonter/signout">@Model.Localization.SignOut</a>
+                    <a href="/volonterpersonal/index">@Model.Localization.Cabinet</a>
                 </li>
                 <li>
-                    <a href="/volonterpersonal/index">@Model.Localization.Cabinet</a>
+                    <a href="/personal/volonter/signout">@Model.Localization.SignOut</a>
                 </li>
             }
             else
             {
                 <li>
-                <a href="/personal/volonter/signin">@Model.Localization.SignIn</a>
+                    <a href="/personal/volonter/signin">@Model.Localization.SignIn</a>
                 </li>
             }
             <li>

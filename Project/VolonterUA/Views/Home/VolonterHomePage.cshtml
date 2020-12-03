@@ -9,7 +9,10 @@
     <div id="logoHref">
         <a href="/Home/Index"></a>
     </div>
-    <p>@Model.FullName</p>
+    @if (Model.UserInfo != null)
+    {
+        <p>@Model.UserInfo.FirstName @Model.UserInfo.LastName</p>
+    }
 </nav>
 
 <div id="Main">
@@ -19,7 +22,13 @@
             @foreach (var ev in Model.UpcomingVolonterEvents)
             {
                 <div class="eventblock">
-                    <h4>@ev.VolonterEvent.Description.Title</h4>
+                    <div class="eventblocktitle">
+                        <h4>@ev.VolonterEvent.Description.Title</h4>
+                        @if (Model.UserInfo != null)
+                        {
+                            <span class="fa fa-star@((Model.UserInfo.Volonter.UpcomingVolonterEvents.Contains(ev)) ? " checked" : "")" id="@ev.VolonterEventId"></span>
+                        }
+                    </div>
                     <dl>
                         <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
                         <dd>@ev.VolonterEvent.Description.TextDescription</dd>
@@ -50,3 +59,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    var subscribebuttons = document.getElementsByClassName("fa-star");
+    for (let button of subscribebuttons) {
+        button.onclick = function () {
+            var eventId = button.getAttribute("id");
+            var xhr = new XMLHttpRequest();
+            var classs = button.getAttribute("class");
+            var isChecked = classs.includes("checked");
+            var method = isChecked ? 'DELETE' : 'POST';
+            xhr.open(method, '/volonterevent/updatesubscribes/?id=' + eventId, false);
+            xhr.send();
+            if (isChecked) {
+                button.setAttribute("class", classs.replace('checked', ''))
+            }
+            else {
+                button.classList.add('checked');
+            }
+        }
+    }
+</script>
