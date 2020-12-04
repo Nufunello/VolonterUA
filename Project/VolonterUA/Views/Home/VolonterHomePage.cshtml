@@ -1,0 +1,82 @@
+﻿@model VolonterUA.Models.ViewModels.Home.VolonterHomePageViewModel
+
+@{
+    ViewBag.Title = Model.Localization.DocumentTitle;
+    Layout = "~/Views/Personal/_Layout.cshtml";
+}
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+    @if (Model.UserInfo != null)
+    {
+        <p>@Model.UserInfo.FirstName @Model.UserInfo.LastName</p>
+    }
+</nav>
+
+<div id="Main">
+    <div id="MainWrapper">
+        <h2>@Model.Localization.Upcoming</h2>
+        <div id="upComingBlocks" class="blockslist">
+            @foreach (var ev in Model.UpcomingVolonterEvents)
+            {
+                <div class="eventblock">
+                    <div class="eventblocktitle">
+                        <h4>@ev.VolonterEvent.Description.Title</h4>
+                        @if (Model.UserInfo != null)
+                        {
+                            <span class="fa fa-star@((Model.UserInfo.Volonter.UpcomingVolonterEvents.Contains(ev)) ? " checked" : "")" id="@ev.VolonterEventId"></span>
+                        }
+                    </div>
+                    <dl>
+                        <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
+                        <dd>@ev.VolonterEvent.Description.TextDescription</dd>
+                    </dl>
+                    <div>
+                        <span>@Model.Localization.Location: @ev.VolonterEvent.Description.Location.TextAddress</span>
+                        <span>@Model.Localization.Date: @ev.VolonterEvent.Description.Date.ToString("dd/M/yyyy hh:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+        <h2>@Model.Localization.InProgress</h2>
+        <div id="inProgressBlocks" class="blockslist">
+            @foreach (var ev in Model.InProgressVolonterEvents)
+            {
+                <div class="eventblock">
+                    <h4>@ev.VolonterEvent.Description.Title</h4>
+                    <dl>
+                        <dt><q>@ev.VolonterEvent.VolonterOrganization.Name</q></dt>
+                        <dd>@ev.VolonterEvent.Description.TextDescription</dd>
+                    </dl>
+                    <div>
+                        <span>@Model.Localization.Location: @ev.VolonterEvent.Description.Location.TextAddress</span>
+                        <span>@Model.Localization.Date: @ev.VolonterEvent.Description.Date.ToString("dd/M/yyyy hh:mm")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    var subscribebuttons = document.getElementsByClassName("fa-star");
+    for (let button of subscribebuttons) {
+        button.onclick = function () {
+            var eventId = button.getAttribute("id");
+            var xhr = new XMLHttpRequest();
+            var classs = button.getAttribute("class");
+            var isChecked = classs.includes("checked");
+            var method = isChecked ? 'DELETE' : 'POST';
+            xhr.open(method, '/volonterevent/updatesubscribes/?id=' + eventId, false);
+            xhr.send();
+            if (isChecked) {
+                button.setAttribute("class", classs.replace('checked', ''))
+            }
+            else {
+                button.classList.add('checked');
+            }
+        }
+    }
+</script>
