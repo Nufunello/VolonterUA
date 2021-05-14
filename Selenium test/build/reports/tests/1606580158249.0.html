@@ -1,0 +1,48 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <style type="text/css">
+        .field-validation-valid {
+            display: none;
+        }
+
+        .validation-summary-valid {
+            display: none;
+        }
+
+        .field-validation-error {
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+    </style>
+
+    <script src="/Scripts/jquery-3.5.1.js"></script>
+
+    <script src="/Scripts/jquery.validate.min.js"></script>
+
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/Scripts/AdultHoodValidate.js"></script>
+
+</head>
+<body>
+    
+
+
+<form action="/personal/volonter/register" method="post" novalidate="novalidate"><label for="ValidationModel_UserLoginData_Login">Логін</label><input class="text-box single-line valid" data-val="true" data-val-length="The field Login must be a string with a minimum length of 8 and a maximum length of 20." data-val-length-max="20" data-val-length-min="8" data-val-regex="The field Login must match the regular expression '^\s*[a-zA-Z]+\s*$'." data-val-regex-pattern="^\s*[a-zA-Z]+\s*$" data-val-required="The Login field is required." id="login" name="ValidationModel.UserLoginData.Login" type="text" value="" aria-describedby="login-error" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.Login" data-valmsg-replace="false">Логін має складатись лише з латинських букв і мати розмір від 8 до 20 символів</span><label for="ValidationModel_UserLoginData_Password">Пароль</label><input data-val="true" data-val-length="The field Password must be a string with a minimum length of 8 and a maximum length of 20." data-val-length-max="20" data-val-length-min="8" data-val-regex="The field Password must match the regular expression '^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[$&amp;+,:;=?@#|'<>.^*()%!-]).*$'." data-val-regex-pattern="^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[$&amp;+,:;=?@#|'<>.^*()%!-]).*$" data-val-required="The Password field is required." id="password" name="ValidationModel.UserLoginData.Password" type="password" aria-describedby="password-error" class="valid" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.Password" data-valmsg-replace="false">Пароль повинен складатися мінімум з 8 максимум 20 символів та мати в собі лише і хоча б по одній: латинські букви(велика та маленька), цифрі та спеціальному символу($&amp;+,:;=?@#|'&lt;&gt;.^*()%!-)</span><label for="ValidationModel_UserLoginData_UserInfo_FirstName">Ім'я</label><input class="text-box single-line valid" data-val="true" data-val-length="The field FirstName must be a string with a maximum length of 30." data-val-length-max="30" data-val-regex="The field FirstName must match the regular expression '(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)'." data-val-regex-pattern="(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)" data-val-required="The FirstName field is required." id="firstName" name="ValidationModel.UserLoginData.UserInfo.FirstName" type="text" value="" aria-describedby="firstName-error" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.UserInfo.FirstName" data-valmsg-replace="false">Ім'я може бути до 30 символів(тільки латинськими або тільки українськи буквами), у випадку якщо у вас подвійне введіть через дефіс "-"</span><label for="ValidationModel_UserLoginData_UserInfo_LastName">Прізвище</label><input class="text-box single-line valid" data-val="true" data-val-length="The field LastName must be a string with a maximum length of 30." data-val-length-max="30" data-val-regex="The field LastName must match the regular expression '(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)'." data-val-regex-pattern="(^\s*([a-zA-Z]+([-a-zA-Z][a-zA-Z])|([a-zA-Z]))*\s*$)|(^\s*[А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+([-А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ][А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])([А-Яа-яа-щА-ЩЬьЮюЯяЇїІіЄєҐґ])*\s*$)" data-val-required="The LastName field is required." id="lastName" name="ValidationModel.UserLoginData.UserInfo.LastName" type="text" value="" aria-describedby="lastName-error" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.UserInfo.LastName" data-valmsg-replace="false">Прізвище може бути до 30 символів(тільки латинськими або тільки українськи буквами), у випадку якщо у вас подвійне введіть через дефіс "-"</span><label for="ValidationModel_UserLoginData_UserInfo_Birthdate">День народження</label><input class="text-box single-line valid" data-val="true" data-val-adulthoodvalidate="" data-val-adulthoodvalidate-adultyears="18" data-val-date="The field Birthdate must be a date." data-val-required="The Birthdate field is required." htmlattributes="{ class = dateTimePicker form-control }" id="birthdate" name="ValidationModel.UserLoginData.UserInfo.Birthdate" type="date" value="" aria-describedby="birthdate-error" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.UserInfo.Birthdate" data-valmsg-replace="false">Користувач має бути повнолітнім</span><label for="ValidationModel_UserLoginData_UserInfo_PhoneNumber">Номер телефону</label><input class="text-box single-line valid" data-val="true" data-val-regex="The field PhoneNumber must match the regular expression '^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$'." data-val-regex-pattern="^\s*\+?(38)?(0(67|68|96|97|98|66|95|99)\d{7})\s*$" data-val-required="The PhoneNumber field is required." id="phoneNumber" name="ValidationModel.UserLoginData.UserInfo.PhoneNumber" type="text" value="" aria-describedby="phoneNumber-error" aria-invalid="false"><span class="field-validation-valid" data-valmsg-for="ValidationModel.UserLoginData.UserInfo.PhoneNumber" data-valmsg-replace="false">Номер повинен бути вигляду +380{номер оператора}... або 380{номер оператора}... або 0{номер оператора}...</span>    <input type="submit" value="Register">
+</form>
+
+</body></html>

@@ -1,0 +1,178 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>Волонтер Україна</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #Header {
+            display: flex;
+            justify-content: space-between;
+            background-color: ghostwhite;
+            width: 100%;
+            height: 40px;
+        }
+
+        #logoHref {
+            width: 200px;
+            height: 100%;
+
+            background-image: url("/Content/Images/Logo.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #logoHref > a {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        #Header > ul {
+            margin: 0;
+
+            list-style-type: none;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            height: 100%;
+        }
+
+        #Header > ul > li {
+            text-align: center;
+            width: 125px;
+            height: 100%;
+        }
+
+        #Header > ul > li > a {
+            display: block;
+            height: 100%;
+            width: 100%;
+
+            color: black;
+            text-decoration: none;
+        }
+
+        #Main {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+
+            background-image: url("/Content/Images/TwoHelpHands.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #Main > div {
+            min-width: 550px;
+            width: 45%;
+            max-height: 50%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        #TitleAndSloganWrapper {
+            height: 70%;
+        }
+
+        #Main > div h3 {
+            font-size: xx-large;
+            text-align: center;
+            color: ghostwhite;
+        }
+
+        #Main > div h1 {
+            font-size: 44px;
+            text-align: center;
+            color: ghostwhite;
+        }
+
+        #SignUpAsButtons {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        #SignUpAsButtons a {
+            text-decoration: none;
+            color: black;
+            font-size: x-large;
+
+            /*whole parent is clickable*/
+            display: block;
+            height: 100%;
+            width: 100%;
+
+            /*vertical align*/
+            line-height: 50px;
+        }
+
+        #SignUpAsButtons > .SignUpAsButtonWrapper {
+            height: 50px;
+            width: 40%;
+            text-align: center;
+            background-color: goldenrod;
+        }
+
+        #SignUpAsButtons > .SignUpAsButtonWrapper:hover {
+            background-color: gold;
+        }
+    </style>
+</head>
+<body>
+    <nav id="Header">
+        <div id="logoHref">
+            <a href="/Home/Index"></a>
+        </div>
+        <ul>
+            <li>
+                <a href="/info/aboutUs">Про нас</a>
+            </li>
+            <li>
+                    <a href="/personal/volonter/signout">Розлогінитись</a>
+            </li>
+            <li>
+                <a href="/volonter/search">Волонтерський захід поруч</a>
+            </li>
+            <li>
+                <a href="/volonter/orginize">Організувати волонтерство</a>
+            </li>
+        </ul>
+    </nav>
+    <div id="Main">
+        <div>
+            <div id="TitleAndSloganWrapper">
+                <div id="TitleWrapper">
+                    <h1 id="Title">Допоможи світу - допоможи собі</h1>
+                </div>
+                <div id="SloganWrapper">
+                    <h3 id="Slogan">Наша ціль - довести, що основою суспільства є взаємодопомога, яка приведе нас до моральних та інтелектуальних висот</h3>
+                </div>
+            </div>
+            <div id="SignUpAsButtons">
+                <div class="SignUpAsButtonWrapper">
+                    <a href="/personal/volonter/register" class="SignUpAsButton" id="RegisterVoloterButton">Хочу допомогти</a>
+                </div>
+                <div class="SignUpAsButtonWrapper">
+                    <a href="/personal/volonterOrganization/register" class="SignUpAsButton" id="RegisterVoloterOrganizationButton">Шукаю волонтерів</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body></html>

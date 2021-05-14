@@ -1,0 +1,241 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+    <style type="text/css">
+        .field-validation-valid {
+            display: none;
+        }
+
+        .validation-summary-valid {
+            display: none;
+        }
+
+        .field-validation-error {
+            display: block;
+            color: #f00;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+            font-weight: bold;
+        }
+
+        .input-validation-error {
+            border: 2px solid #f00;
+            background-color: #fee;
+        }
+
+        input[type="checkbox"].input-validation-error {
+            outline: 2px solid #f00;
+        }
+
+        dl{
+            margin: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        #Header {
+            display: flex;
+            justify-content: space-between;
+            background-color: ghostwhite;
+            width: 100%;
+            height: 40px;
+        }
+
+        #logoHref {
+            width: 200px;
+            height: 100%;
+
+            background-image: url("/Content/Images/Logo.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #logoHref > a {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+        }
+
+        #Main {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+
+            background-image: url("/Content/Images/TwoHelpHands.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .label {
+            display: block;
+            font-size: large;
+            text-align: center;
+            color: black;
+        }
+
+        .text-box {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .inp {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        #password {
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        form {
+            width: 20%;
+            background-color: hsla(57, 92%, 73%, 0.92);
+        }
+
+        form > div{
+            padding: 20px;
+        }
+
+        form > div > div {
+            padding: 5px;
+        }
+
+        .blockslist {
+            height: 35%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-content: start;
+            overflow-x: scroll;
+        }
+
+        .eventblock {
+            background-color: hsla(57, 92%, 73%, 0.92);
+            width: 265px;
+            padding-left: 5px;
+            margin-top: 5px;
+            margin-right: 5px;
+            border: solid black 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .eventblocktitle h4,span
+        {
+            display: inline-block;
+        }
+
+        .eventblock > dl > dd {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
+
+        .eventblock div
+        {
+            text-align: right;
+        }
+
+        .eventblock div span
+        {
+            padding-right: 5px;
+            display: block;
+            font-size: small;
+            overflow-x: hidden;
+            text-overflow: clip;
+            white-space: nowrap;
+        }
+
+        #MainWrapper {
+            height: 90%;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            background-color: hsla(57, 92%, 86%, 0.92);
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            min-width: 750px;
+            min-height: 630px;
+        }
+
+    </style>
+
+    <script src="/Scripts/jquery-3.5.1.js"></script>
+
+    <script src="/Scripts/jquery.validate.min.js"></script>
+
+    <script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/Scripts/AdultHoodValidate.js"></script>
+
+</head>
+<body>
+    
+
+
+<nav id="Header">
+    <div id="logoHref">
+        <a href="/Home/Index"></a>
+    </div>
+</nav>
+
+<div id="Main">
+<form action="/volonterevent/organize" method="post" novalidate="novalidate">    <div>
+        <div>
+            <label class="label" for="ValidationModel_VolonterEvent_Description_Title">Назва волонтерського заходу</label>
+            <input class="text-box single-line" data-val="true" data-val-required="The Title field is required." id="title" name="ValidationModel.VolonterEvent.Description.Title" type="text" value="">
+            <span class="field-validation-valid" data-valmsg-for="ValidationModel.VolonterEvent.Description.Title" data-valmsg-replace="false">Поле не може бути пустим</span>
+        </div>
+
+        <div>
+            <label class="label" for="ValidationModel_VolonterEvent_Description_TextDescription">Опис</label>
+            <textarea class="inp" cols="20" data-val="true" data-val-required="The TextDescription field is required." id="ValidationModel_VolonterEvent_Description_TextDescription" name="ValidationModel.VolonterEvent.Description.TextDescription" rows="2"></textarea>
+            <span class="field-validation-valid" data-valmsg-for="ValidationModel.VolonterEvent.Description.TextDescription" data-valmsg-replace="false">Поле не може бути пустим</span>
+        </div>
+
+        <div>
+            <label class="label" for="ValidationModel_VolonterEvent_Description_Date">Дата</label>
+            <input class="inp" data-val="true" data-val-date="The field Date must be a date." data-val-required="The Date field is required." id="ValidationModel_VolonterEvent_Description_Date" name="ValidationModel.VolonterEvent.Description.Date" type="datetime-local" value="">
+            <span class="field-validation-valid" data-valmsg-for="ValidationModel.VolonterEvent.Description.Date" data-valmsg-replace="false">Поле не може бути пустим</span>
+        </div>
+
+        <div>
+            <label class="label" for="ValidationModel_VolonterEvent_Description_Location_TextAddress">Адресса</label>
+            <input class="text-box single-line" data-val="true" data-val-required="The TextAddress field is required." id="textAddress" name="ValidationModel.VolonterEvent.Description.Location.TextAddress" type="text" value="">
+            <span class="field-validation-valid" data-valmsg-for="ValidationModel.VolonterEvent.Description.Location.TextAddress" data-valmsg-replace="false">Поле не може бути пустим</span>
+        </div>
+
+
+        <div>
+            <input type="submit" id="registerButton" value="Організувати">
+        </div>
+    </div>
+</form></div>
+
+
+</body></html>

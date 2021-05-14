@@ -5,16 +5,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.BeforeClass;
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
-import org.openqa.selenium.opera.OperaOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.util.concurrent.TimeUnit;
@@ -26,16 +20,10 @@ public class SeleniumTest {
     public void testDriverOpen() {
         Configuration.browser = "opera";
         Configuration.timeout = 3000;
-
     }
-    private WebDriver driver;
-
-
-                                /*POSITIVE */
-
 
     @Test
-    public void test_Registration() throws InterruptedException {
+    public void test_Authorization() throws InterruptedException {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Хочу допомогти")).click();
@@ -52,7 +40,24 @@ public class SeleniumTest {
         Thread.sleep(15000);
     }
     @Test
-    public void test_user_clicks_looking_for_volunteers() throws InterruptedException {
+    public void test_Authorization_login_already_exists() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Хочу допомогти")).click();
+        $(By.id("login")).sendKeys("AndriShunkariuk");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("firstName")).sendKeys("Andy");
+        $(By.id("lastName")).sendKeys("Shynkariuk");
+        $(By.id("birthdate")).sendKeys("09.12.2000");
+        $(By.id("phoneNumber")).sendKeys("+380975380612");
+        $(By.id("registerButton")).click();
+        String expectUrl = "https://localhost:44388/VolonterEvent/Search";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_not_an_authorized_user_clicks_looking_for_volunteers() throws InterruptedException {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Шукаю волонтерів")).click();
@@ -85,12 +90,22 @@ public class SeleniumTest {
         $(By.id("login")).sendKeys("AndriShunkariuk");
         $(By.id("password")).sendKeys("AndyAndy1111@");
         $(By.id("loginButton")).click();
-        Thread.sleep(150);
-        WebElement element = driver.findElement(By.linkText("Розлогінитись"));
-        Assert.assertTrue(element.isDisplayed());
-           /* String expectUrl = "https://localhost:44388/Home/Index";
+        String expectUrl = "https://localhost:44388/Home/Index";
         String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);*/
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_Log_in_non_existent_password() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Увійти")).click();
+        $(By.id("login")).sendKeys("AndriShunkariuk");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("loginButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
         Thread.sleep(15000);
     }
     @Test
@@ -108,7 +123,53 @@ public class SeleniumTest {
         Thread.sleep(15000);
     }
     @Test
-    public void test_Autorization_lastname_in_English() throws InterruptedException {
+    public void test_Log_in_and_click_Autorization() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Увійти")).click();
+        $(By.id("login")).sendKeys("AndriShunkariuk");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("loginButton")).click();
+        $(By.id("RegisterVoloterButton")).click();
+        String expectUrl = "https://localhost:44388/VolonterEvent/Search";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_There_is_no_such_login() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Увійти")).click();
+        $(By.id("login")).sendKeys("IvanIvanov");
+        $(By.id("password")).sendKeys("IvanIvanovych11@");
+        $(By.id("loginButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+
+    @Test
+    public void test_Bag_Autorization_firsname_and_lastname() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Хочу допомогти")).click();
+        $(By.id("login")).sendKeys("MaryShunkariuk");
+        $(By.id("password")).sendKeys("Mary12345@");
+        $(By.id("firstName")).sendKeys("Мар'яна");
+        $(By.id("lastName")).sendKeys("Шинкар'юк");
+        $(By.id("birthdate")).sendKeys("09.12.2000");
+        $(By.id("phoneNumber")).sendKeys("+380975380612");
+        $(By.id("registerButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+
+    @Test
+    public void test_Autorization_firsname_and_lastname() throws InterruptedException {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Хочу допомогти")).click();
@@ -125,7 +186,58 @@ public class SeleniumTest {
         Thread.sleep(15000);
     }
     @Test
-    public void test_Registration_phoneNumber_mts() throws InterruptedException {
+    public void test_Bag_Autorization_login() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Хочу допомогти")).click();
+        $(By.id("login")).sendKeys("     Andriy");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("firstName")).sendKeys("Андрій");
+        $(By.id("lastName")).sendKeys("Шинкарюк");
+        $(By.id("birthdate")).sendKeys("09.12.2000");
+        $(By.id("phoneNumber")).sendKeys("+380975380612");
+        $(By.id("registerButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_Error_birthdate() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Хочу допомогти")).click();
+        $(By.id("login")).sendKeys("AndyShunkariuk");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("firstName")).sendKeys("Andy");
+        $(By.id("lastName")).sendKeys("Shynkariuk");
+        $(By.id("birthdate")).sendKeys("35.15.2000");
+        $(By.id("phoneNumber")).sendKeys("+380975380612");
+        $(By.id("registerButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_Authorization_error_phoneNumber() throws InterruptedException {
+        String expectedUrl = "https://localhost:44388";
+        open(expectedUrl);
+        $(By.linkText("Хочу допомогти")).click();
+        $(By.id("login")).sendKeys("AndyAndriyovuch");
+        $(By.id("password")).sendKeys("AndyAndy1111@");
+        $(By.id("firstName")).sendKeys("Andy");
+        $(By.id("lastName")).sendKeys("Shynkariuk");
+        $(By.id("birthdate")).sendKeys("09.12.2000");
+        $(By.id("phoneNumber")).sendKeys("+38097538061222");
+        $(By.id("registerButton")).click();
+        String expectUrl = "https://localhost:44388/Home/Index";
+        String currenUrl = WebDriverRunner.url();
+        Assert.assertEquals(currenUrl,expectUrl);
+        Thread.sleep(15000);
+    }
+    @Test
+    public void test_Authorization_phoneNumber_mts() throws InterruptedException {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Хочу допомогти")).click();
@@ -142,7 +254,7 @@ public class SeleniumTest {
         Thread.sleep(15000);
     }
     @Test
-    public void test_Registration_phoneNumber_life() throws InterruptedException {
+    public void test_Authorization_phoneNumber_life() throws InterruptedException {
         String expectedUrl = "https://localhost:44388";
         open(expectedUrl);
         $(By.linkText("Хочу допомогти")).click();
@@ -242,135 +354,5 @@ public class SeleniumTest {
     }
 
 
-
-                        /*Tests NEGATIVE*/
-
-
-@Test
-public void test_Registration_login_already_exists() throws InterruptedException {
-    String expectedUrl = "https://localhost:44388";
-    open(expectedUrl);
-    $(By.linkText("Хочу допомогти")).click();
-    $(By.id("login")).sendKeys("AndriShunkariuk");
-    $(By.id("password")).sendKeys("AndyAndy1111@");
-    $(By.id("firstName")).sendKeys("Andy");
-    $(By.id("lastName")).sendKeys("Shynkariuk");
-    $(By.id("birthdate")).sendKeys("09.12.2000");
-    $(By.id("phoneNumber")).sendKeys("+380975380612");
-    $(By.id("registerButton")).click();
-    String expectUrl = "https://localhost:44388/VolonterEvent/Search";
-    String currenUrl = WebDriverRunner.url();
-    Assert.assertEquals(currenUrl,expectUrl);
-    Thread.sleep(15000);
-}
-    @Test
-    public void test_Log_in_non_existent_password() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriShunkariuk");
-        $(By.id("password")).sendKeys("AndyAndy1111@");
-        $(By.id("loginButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-    @Test
-    public void test_Log_in_and_click_Autorization() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("AndriShunkariuk");
-        $(By.id("password")).sendKeys("AndyAndy1111@");
-        $(By.id("loginButton")).click();
-        $(By.id("RegisterVoloterButton")).click();
-        String expectUrl = "https://localhost:44388/VolonterEvent/Search";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-    @Test
-    public void test_There_is_no_such_login() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Увійти")).click();
-        $(By.id("login")).sendKeys("IvanIvanov");
-        $(By.id("password")).sendKeys("IvanIvanovych11@");
-        $(By.id("loginButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-
-    @Test
-    public void test_Registration_apostrophe_in_the_firsname_and_lastname() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Хочу допомогти")).click();
-        $(By.id("login")).sendKeys("MaryShunkariuk");
-        $(By.id("password")).sendKeys("Mary12345@");
-        $(By.id("firstName")).sendKeys("Мар'яна");
-        $(By.id("lastName")).sendKeys("Шинкар'юк");
-        $(By.id("birthdate")).sendKeys("09.12.2000");
-        $(By.id("phoneNumber")).sendKeys("+380975380612");
-        $(By.id("registerButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-    @Test
-    public void test_Autorization_spaces_in_the_login() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Хочу допомогти")).click();
-        $(By.id("login")).sendKeys("     Andriy");
-        $(By.id("password")).sendKeys("AndyAndy1111@");
-        $(By.id("firstName")).sendKeys("Андрій");
-        $(By.id("lastName")).sendKeys("Шинкарюк");
-        $(By.id("birthdate")).sendKeys("09.12.2000");
-        $(By.id("phoneNumber")).sendKeys("+380975380612");
-        $(By.id("registerButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-    @Test
-    public void test_Registration_Error_birthdate() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Хочу допомогти")).click();
-        $(By.id("login")).sendKeys("AndyShunkariuk");
-        $(By.id("password")).sendKeys("AndyAndy1111@");
-        $(By.id("firstName")).sendKeys("Andy");
-        $(By.id("lastName")).sendKeys("Shynkariuk");
-        $(By.id("birthdate")).sendKeys("35.15.2000");
-        $(By.id("phoneNumber")).sendKeys("+380975380612");
-        $(By.id("registerButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
-    @Test
-    public void test_Registration_error_phoneNumber() throws InterruptedException {
-        String expectedUrl = "https://localhost:44388";
-        open(expectedUrl);
-        $(By.linkText("Хочу допомогти")).click();
-        $(By.id("login")).sendKeys("AndyAndriyovuch");
-        $(By.id("password")).sendKeys("AndyAndy1111@");
-        $(By.id("firstName")).sendKeys("Andy");
-        $(By.id("lastName")).sendKeys("Shynkariuk");
-        $(By.id("birthdate")).sendKeys("09.12.2000");
-        $(By.id("phoneNumber")).sendKeys("+38097538061222");
-        $(By.id("registerButton")).click();
-        String expectUrl = "https://localhost:44388/Home/Index";
-        String currenUrl = WebDriverRunner.url();
-        Assert.assertEquals(currenUrl,expectUrl);
-        Thread.sleep(15000);
-    }
 
 }
